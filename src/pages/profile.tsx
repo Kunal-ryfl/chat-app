@@ -4,9 +4,9 @@ import { useSession } from 'next-auth/react';
 import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
 import Image from 'next/image';
-const profile = () => {
+const Profile = () => {
     
-  
+
     const {data:useSessionData} = useSession();
     const {data,isLoading,error} = api.example.getUserPosts.useQuery();
     const len:number = data?.length || 0;
@@ -43,4 +43,4 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile
