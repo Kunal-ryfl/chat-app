@@ -18,7 +18,7 @@ const feed = () => {
     <Create/>  
     {
       data?.map((post)=>(
-        <Post caption={post.caption} postid ={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
+        <Post caption={post.caption} key={post.id} postid ={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
       ))
     }
 

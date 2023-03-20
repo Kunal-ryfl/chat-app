@@ -5,7 +5,8 @@ import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
 import Image from 'next/image';
 const profile = () => {
-    // const {data,isLoading,error} = api.example.getUser.useQuery({text:userid});
+    
+  
     const {data:useSessionData} = useSession();
     const {data,isLoading,error} = api.example.getUserPosts.useQuery();
     const len:number = data?.length || 0;
@@ -27,7 +28,7 @@ const profile = () => {
         { len > 0?
               <>{
             data?.map((post)=>(
-                <Post caption={post.caption} postid={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
+                <Post caption={post.caption} key={post.id} postid={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
                 ))}
               </>:<div>
                 <h1 className='  text-sm text-[hsl(280,100%,70%)]'>No posts</h1>
