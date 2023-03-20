@@ -6,18 +6,42 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
+    directUrl = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
+model Post{
+    id                String  @id @default(cuid())
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    caption           String
+    userId            String
+    user              User @relation(fields: [userId],references: [id],onDelete: Cascade)
+    img                String ?
+    comments           Comment[]
+    liked             LikedPost[]
+}
+
+model LikedPost{
+    postId String
+    Post Post @relation(fields: [postId],references: [id],onDelete: Cascade)
+    userId  String
+    user User @relation(fields: [userId],references: [id],onDelete: Cascade)  
+    @@id([postId, userId]) 
+}
+
+model Comment{
+    id                String  @id @default(cuid())
+    createdAt DateTime @default(now())
+    caption           String
+    userId            String
+    user              User @relation(fields: [userId],references: [id],onDelete: Cascade)
+    Postid            String
+    Post              Post @relation(fields: [Postid],references: [id],onDelete: Cascade)
 }
 
 // Necessary for Next auth
@@ -27,12 +51,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
+    refresh_token     String?  @db.Text
+    access_token      String?  @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? // @db.Text
+    id_token          String?  @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -55,6 +79,11 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+
+    posts         Post[]
+    comments      Comment[]
+    likedposts    LikedPost[]
+    
 }
 
 model VerificationToken {
