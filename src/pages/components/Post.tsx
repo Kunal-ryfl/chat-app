@@ -37,7 +37,7 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
            <div>
 
         <p className=' text-sm font-thin '> {data?.name }</p>
-        <p className=' text-[11px] font-thin pt-1'> {date.toLocaleString()} </p>
+        <p className=' text-[11px] font-thin pt-1'> {date?.toLocaleString()} </p>
            </div>
            </div>
              </div>
