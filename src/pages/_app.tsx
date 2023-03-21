@@ -5,7 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import Link from "next/link";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
-import { usePathname} from 'next/navigation';
+import { usePathname} from 'next/navigation'
+import Bottomnav from "./components/Bottomnav";
 
 import { Inter } from 'next/font/google'
 
@@ -33,7 +34,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
            
 
 
-            <div className=' sticky top-10 my-4 gap-3 border-white/10 md:border-2    px-8 py-4 h-fit grid   grid-cols-3 xl:grid-cols-1 rounded-sm  '>
+            <div className=' hidden xl:sticky top-10 my-4 gap-3 border-white/10 md:border-2    px-8 py-4 h-fit xl:grid   grid-cols-3 xl:grid-cols-1 rounded-sm  '>
                
              <div className=" flex justify-center md:justify-start items-center" ><Link href={"/feed"}><h1  className={pathname.substring(1)==='feed'?" text-[hsl(280,100%,70%)]":""} >Home</h1></Link></div>
              <div className="  flex justify-center md:justify-start items-center"><Link href={"/"}><h1>Notification</h1></Link></div>
@@ -42,7 +43,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             </div>
      
         </div>
-        <div className=' px-2 py-4  md:flex   md:justify-center  text-white col-span-6   ' >
+        <div className='   md:flex   md:justify-center  text-white col-span-6   ' >
             
             {/* <h1 className=' text-2xl font-bold'>{pathname.substring(1)}</h1> */}
      
@@ -58,6 +59,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         </div>
      
 
+            <Bottomnav/>
              </div>
              </div>
      

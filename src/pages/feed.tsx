@@ -10,7 +10,7 @@ const feed = () => {
   if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
   return (
     
-   <div className='  '   >
+   <div className=' px-2 pb-16 py-2'   >
        
        <h1 className=' text-2xl font-bold'>Home</h1>
 

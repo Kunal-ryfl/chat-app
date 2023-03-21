@@ -12,9 +12,9 @@ const Profile = () => {
     const len:number = data?.length || 0;
     if(isLoading) return<> <MoonLoader color='purple' className=' mx-auto my-10'/> </>
   return (
-    <div className=' min-h-screen  text-white bg-black'>
+    <div className=' min-h-screen px-2 pb-16 py-2  text-white bg-black'>
         
-        <div className=' rounded-sm  w-full md:w-[600px] grid grid-cols-10     px-2 py-4' >
+        <div className='   rounded-sm  w-full md:w-[600px] grid grid-cols-10     px-2 py-4' >
 
           <div className=' col-span-3'>
 
@@ -25,7 +25,7 @@ const Profile = () => {
           <div className=' px-2 py-4 col-span-7'>
 
         <h1 className=' text-base md:text-2xl'>{useSessionData?.user.name}</h1>
-        <h1 className=' text-sm text-gray-400'>{useSessionData?.user.email}</h1>
+        <h1 className=' text-[11px] md:text-sm text-gray-400'>{useSessionData?.user.email}</h1>
           </div>
 
         </div>
