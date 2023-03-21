@@ -13,7 +13,7 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
   const liked= api.example.Liked.useQuery({id:postid});
   
 
-  let bool_like:boolean = false ;
+  let bool_like = false ;
 
   liked !== null ? bool_like = false : bool_like = true;   
 
