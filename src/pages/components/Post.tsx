@@ -20,10 +20,6 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
 
   const { mutate: likeMutation, } = api.example.toggleLike.useMutation({
    
-    onMutate:async()=>{
-         
-    },
-   
     onSettled: async () => {
       // console.log('toggledLike') 
       
