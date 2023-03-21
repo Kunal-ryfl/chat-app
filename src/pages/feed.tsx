@@ -7,7 +7,7 @@ import { MoonLoader } from 'react-spinners'
 
 const feed = () => {
   const {data,isLoading,error} = api.example.getPosts.useQuery();
-  if(isLoading) return<> <MoonLoader color='purple' className=' my-10'/> </>
+  if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
   return (
     
    <div className='  '   >

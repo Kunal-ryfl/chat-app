@@ -105,24 +105,42 @@ Liked: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,inp
   
   toggleLike: protectedProcedure.input( z.object({ postid:z.string() }) ).mutation(async({ ctx,input }) => {
 
-     const liked =  await ctx.prisma.likedPost.findFirst({
+     const liked =  await ctx.prisma.user.findFirst({
       where: {
-        postId:input.postid,
-        userId:ctx.session.user.id,
+        
+        
+        id:ctx.session.user.id,
+        likedposts:{
+          some:{
+            postId:input.postid,
+          }
+        },
       },
     })
     
 
     return liked === null? ctx.prisma.likedPost.create({
       data: {
-        userId:ctx.session.user.id,
-        postId:input.postid,  
+        Post:{
+          connect:{
+            id:input.postid,
+          },
+        },
+        
+        user:{
+          connect:{
+            id:ctx.session.user.id,
+          },
+        },
+        
       },
   
-  }) : ctx.prisma.likedPost.deleteMany({
+  }) : ctx.prisma.likedPost.delete({
     where: {
-      userId:ctx.session.user.id,
-      postId:input.postid,
+      postId_userId:{
+        userId:ctx.session.user.id,
+        postId:input.postid,
+      }
     },
 
   });

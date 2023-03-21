@@ -22,7 +22,7 @@ const Create = () => {
 	});  
     
   return (
-    <form className=' flex my-4  py-4 '
+    <form className=' flex items-center my-2 border-white/10 border-2 px-2  py-4 '
     onSubmit={(e) => {
       e.preventDefault()
       
@@ -43,10 +43,10 @@ const Create = () => {
     >
         {/* <button className='mr-2 rounded-full  bg-purple-500 px-2 py-1'>Kun</button> */}
         <Image src={useSessionData?.user.image ||"/img"} unoptimized height={70} width={65} alt="" className=" mr-3 rounded-full " />
-        <input type='text' placeholder='whats on your mind ...' className='  w-full text-sm  bg-white/10 px-4 py-1   rounded-xl' 
+        <input type='text' placeholder='whats on your mind ...' className='  w-full text-sm md:text-lg font-light bg-transparent outline-none  px-4 py-1   ' 
         onChange={(e)=>setPost(e.target.value)}
         />
-        <button  className=' ml-2 rounded-xl  font-semibold md:text-xl bg-white/10 text-sm  text-[hsl(280,100%,70%)] px-4 py-2 '>Post</button>
+        <button  className=' rounded-full  font-semibold md:text-xl  text-sm  bg-[hsl(280,100%,70%)]  px-6 py-2 '>Post</button>
         
     </form>
   )

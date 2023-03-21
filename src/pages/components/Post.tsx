@@ -12,8 +12,17 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
 
   const liked= api.example.Liked.useQuery({id:postid});
   
+
+  let bool_like:boolean = false ;
+
+  liked !== null ? bool_like = false : bool_like = true;   
+
+
   const { mutate: likeMutation, } = api.example.toggleLike.useMutation({
    
+    onMutate:async()=>{
+         
+    },
    
     onSettled: async () => {
       // console.log('toggledLike') 
@@ -24,7 +33,7 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
 
   })
 
-  if(isLoading) return <div className="border border-blue-300 shadow rounded-md p-4 w-full md:w-[600px] mx-auto my-3">
+  if(isLoading) return <div className=" rounded-sm border-white/10 border-2 shadow  p-4 w-full md:w-[600px] mx-auto my-3">
   <div className="animate-pulse flex space-x-4">
     <div className="rounded-full bg-slate-700 h-10 w-10"></div>
     <div className="flex-1 space-y-6 py-1">
@@ -41,35 +50,57 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
 </div>
   
   return (
-    <div className=' rounded-xl bg-white/10 my-3 w-full md:w-[600px] grid grid-rows-10  p-2 '>
+    
         
-        <div className=' py-1 row-span-2 flex flex-col '>
-           <div className=' flex '>
-            
-           {/* <CgProfile className=' text-4xl mr-3'/> */}
-           <Image src={data?.image ||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full " />
-           <div>
+        <div className=' rounded-sm border-white/10 border-2 my-3 w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
 
-        <p className=' text-sm font-thin '> {data?.name }</p>
-        <p className=' text-[11px] font-thin pt-1'> {date?.toLocaleString()} </p>
-           </div>
-           </div>
-             </div>
-        <div className='relative row-span-6 bg-black/20  rounded-md p-2'>
+        
+         <div className=' p-1   col-span-1 '>
+           <Image src={data?.image ||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
+         </div>
+
+         
+
+
+
+
+         <div className=' grid grid-rows-10   col-span-9'>
+        <div className=' p-1 row-span-2'>
+
+            
+        <p className=' text-sm  font-semibold '> {data?.name }</p>
+        <p className=' text-[10px] font-extralight mb-2   '> {date?.toLocaleString()} </p>
+      
+             <p className=' text-sm md:text-md  text-white/95 '>{caption}</p>
+        </div>
+
+           <div className='  relative row-span-8  bg-purpe-500'>
           {
                img!=="/df"?
-<Image src={img} className=" w-full   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />:<></>
+<Image src={img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />:<></>
           }
-<p>{caption}</p>
-        </div >
-        <div className=' flex  items-center gap-2 py-1 row-span-2 text-gray-400'>
+
+          
+          
+
+
+         <div  className='  py-2 flex gap-2  ' > 
               <button  className=' flex items-center gap-2'
               onClick={()=>likeMutation({postid})}
-              >  {liked.data === null?<  FcLikePlaceholder/>:<FcLike/>} {likes.data} </button>
+              >  { !bool_like ?<  FcLikePlaceholder/>:<FcLike/>} {likes.data} </button>
             <div className=' flex items-center gap-2'> <BiComment/> {0}  </div>
-            </div>
-        
-    </div>
+         </div>
+
+            </div>  
+
+         </div>
+
+
+
+
+
+         </div>
+
   )
 }
 
