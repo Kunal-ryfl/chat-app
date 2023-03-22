@@ -103,23 +103,10 @@ Liked: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,inp
   
 
   
-  toggleLike: protectedProcedure.input( z.object({ postid:z.string() }) ).mutation(async({ ctx,input }) => {
+  likePost: protectedProcedure.input( z.object({ postid:z.string() }) ).mutation(async({ ctx,input }) => {
 
-     const liked =  await ctx.prisma.user.findFirst({
-      where: {
-        
-        
-        id:ctx.session.user.id,
-        likedposts:{
-          some:{
-            postId:input.postid,
-          }
-        },
-      },
-    })
-    
 
-    return liked === null? ctx.prisma.likedPost.create({
+    return  ctx.prisma.likedPost.create({
       data: {
         Post:{
           connect:{
@@ -135,7 +122,13 @@ Liked: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,inp
         
       },
   
-  }) : ctx.prisma.likedPost.delete({
+  });
+}),
+  
+
+unlikePost: protectedProcedure.input( z.object({ postid:z.string() }) ).mutation(async({ ctx,input }) => {
+
+    return   ctx.prisma.likedPost.delete({
     where: {
       postId_userId:{
         userId:ctx.session.user.id,
@@ -147,9 +140,4 @@ Liked: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,inp
 }),
 
   
-
-
-  // getSecretMessage: protectedProcedure.query(() => {
-  //   return "you can now see this secret message!";
-  // }),
 });

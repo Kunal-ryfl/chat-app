@@ -3,6 +3,8 @@ import { api } from '~/utils/api';
 import Image from 'next/image';
 import {FcLikePlaceholder} from 'react-icons/fc'
 import {FcLike} from 'react-icons/fc'
+import {AiFillHeart} from 'react-icons/ai'
+
 import {BiComment} from 'react-icons/bi'
 const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:string}) => {
   const {caption,date,userid,img,postid} = post;
@@ -13,21 +15,32 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
   const liked= api.example.Liked.useQuery({id:postid});
   
 
-  let bool_like = false ;
-
-  liked !== null ? bool_like = false : bool_like = true;   
 
 
-  const { mutate: likeMutation, } = api.example.toggleLike.useMutation({
+  const { mutate: likeMutation, } = api.example.likePost.useMutation({
    
     onSettled: async () => {
-      // console.log('toggledLike') 
+      console.log('Liked') 
       
-      await trpc.example.getLikes.invalidate()
       await trpc.example.Liked.invalidate()
+      await trpc.example.getLikes.invalidate()
     },
 
   })
+
+  const { mutate: unlikeMutation, } = api.example.unlikePost.useMutation({
+   
+    onSettled: async () => {
+      console.log('unLiked') 
+      
+      await trpc.example.Liked.invalidate()
+      await trpc.example.getLikes.invalidate()
+    },
+
+  })
+
+
+
 
   if(isLoading) return <div className=" rounded-sm border-white/10 border-2 shadow  p-4 w-full md:w-[600px] mx-auto my-3">
   <div className="animate-pulse flex space-x-4">
@@ -61,7 +74,7 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
 
 
          <div className=' grid grid-rows-10   col-span-9'>
-        <div className=' p-1 row-span-2'>
+        <div className=' p-1 '>
 
             
         <p className=' text-sm  font-semibold '> {data?.name }</p>
@@ -70,7 +83,7 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
              <p className=' text-sm md:text-md  text-white/95 '>{caption}</p>
         </div>
 
-           <div className='  relative row-span-8  bg-purpe-500'>
+           <div className='  relative   bg-purpe-500'>
           {
                img!=="/df"?
 <Image src={img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />:<></>
@@ -82,10 +95,19 @@ const Post = (post:{caption:string,date:Date,userid:string,img:string,postid:str
 
          <div  className='  py-2 flex gap-2  ' > 
               <button  className=' flex items-center gap-2'
-              onClick={()=>likeMutation({postid})}
-              >  { !bool_like ?<  FcLikePlaceholder/>:<FcLike/>} {likes.data} </button>
+              onClick = {liked.data === null? ()=>likeMutation({postid}):()=>unlikeMutation({postid})}
+              >  
+              {/* { !bool_like ?< AiOutlineHeart className=' '/>:<FcLike/>} {likes.data}  */}
+             
+
+             <AiFillHeart className={liked.data === null? "":" fill-red-600"} />{likes.data} 
+              </button>
+              
             <div className=' flex items-center gap-2'> <BiComment/> {0}  </div>
          </div>
+
+
+      
 
             </div>  
 

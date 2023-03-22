@@ -50,7 +50,17 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
+    
     }),
+
+    
     /**
      * ...add more providers here.
      *
@@ -61,6 +71,7 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+
 };
 
 /**

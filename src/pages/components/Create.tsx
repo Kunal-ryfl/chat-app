@@ -3,20 +3,20 @@ import { api } from '~/utils/api';
 import { postInput } from '~/types';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+
 const Create = () => {
  const[post,setPost] = useState("");  
  const trpc = api.useContext();
 
 
- const {data:useSessionData} = useSession();
+   const {data:useSessionData} = useSession();
+
     const { mutate } = api.example.create.useMutation({
 	
 		// Always refetch after error or success:
 		onSettled: async () => {
 			console.log('SETTLED')
 			await trpc.example.getPosts.invalidate()
-            // toast.remove()
-            // toast.success("Post created")
             
 		},
 	});  
