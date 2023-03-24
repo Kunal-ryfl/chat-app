@@ -8,7 +8,7 @@ import {BiComment} from 'react-icons/bi'
 import { Post } from '~/types';
 
 type likesElement = {
- userId:string
+ userId:String
 }
 
 type authorType = {
@@ -30,10 +30,9 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
   // const likes = api.example.getLikes.useQuery({id:postid});
   const trpc = api.useContext();
 
-  // let liked = post?.hasLiked?.length > 0;
-   
-       
  
+  
+
 
 
 //   if(isLoading) return <div className=" rounded-sm border-white/10 border-2 shadow  p-4 w-full md:w-[600px] mx-auto my-3">
@@ -59,7 +58,7 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
 
         
          <div className=' p-1   col-span-1 '>
-           <Image src={ author.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
+           <Image src={ author?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
          </div>
 
 
@@ -81,8 +80,6 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
           }
 
           
-
-       
 
       
 
