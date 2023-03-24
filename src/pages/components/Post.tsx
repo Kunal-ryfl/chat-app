@@ -153,7 +153,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
            <div className='  relative   bg-purpe-500'>
           {
                tweet?.img &&
-<Image src={tweet.img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />          
+<Image src={tweet?.img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />          
 }
 
           
@@ -165,7 +165,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
               {/* { !bool_like ?< AiOutlineHeart className=' '/>:<FcLike/>} {likes.data}  */}
              
 
-             <AiFillHeart className={!hasLiked? "":" fill-red-600"} />{tweet?._count.likes} 
+             <AiFillHeart className={!hasLiked? "":" fill-red-600"} />{tweet?._count?.likes} 
               </button>
               
             <div className=' flex items-center gap-2'> <BiComment/> {0}  </div>
