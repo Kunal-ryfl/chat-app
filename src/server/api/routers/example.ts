@@ -56,35 +56,6 @@ export const exampleRouter = createTRPCRouter({
 
 
    
-  getAllUsers: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.user.findMany();
-  }),
-
-  
-  getPostById: publicProcedure.input(z.object({postid:z.string()})).query(({ ctx }) => {
-    return ctx.prisma.post.findMany({
-      where:{
-        id:ctx.session?.user.id,
-      },
-      include: {
-        likes: {
-          where: {
-            userId:ctx.session?.user?.id,
-          },
-          select: {
-            userId: true,
-          },
-        },
-        _count: {
-          select: {
-            likes: true,
-          },
-        },
-      },
-    
-    });
-  }),
-
   
   
   getUserPosts: protectedProcedure.query(({ ctx }) => {
@@ -163,24 +134,8 @@ export const exampleRouter = createTRPCRouter({
   }),
 
 
-  getLikes: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,input }) => {
-    return   ctx.prisma.likedPost.count({
-      where: {
-        postId:input.id
-      },
-  
-  });
-}),
   
 
-Liked: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,input }) => {
-    return   ctx.prisma.likedPost.findFirst({
-      where: {
-        postId:input.id,
-        userId:ctx.session.user.id,
-      },
-   });
-}),
   
 
   

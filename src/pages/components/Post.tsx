@@ -1,36 +1,105 @@
 import React from 'react'
-import { api } from '~/utils/api';
+import { api, RouterOutputs } from '~/utils/api';
 import Image from 'next/image';
-import {FcLikePlaceholder} from 'react-icons/fc'
-import {FcLike} from 'react-icons/fc'
+
 import {AiFillHeart} from 'react-icons/ai'
 import {BiComment} from 'react-icons/bi'
-import { Post } from '~/types';
 
-type likesElement = {
- userId:string
-}
+import { InfiniteData,useQueryClient, QueryClient } from '@tanstack/react-query';
 
-type authorType = {
- id:string
- name :string | null
- image :string | null  
 
-}
 
-const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesElement[],likesCount:number ,date:Date,userid:string,img:string,postid:string}) => {
 
+function updateCache({
+  client,
+  variables,
+  data,
+  action,
+}: {
+  client: QueryClient;
   
+  variables: {
+    postid: string;
+  };
+  data: {
+    userId: string;
+  };
+  action: "like" | "unlike";
+}) 
 
 
-  const {caption,date,userid,img,postid,likesCount,author} = post;
+{
+  client.setQueryData(
+    [
+      [
+        "example","getPosts"
+      ],
+      {
+        type: "query",
+      }
+    ],
 
+
+    (oldData) => {
+    //  console.log({oldData})
+     const newData = oldData as RouterOutputs["example"]["getPosts"];
+    //  console.log({newData})
+
+      const value = action === "like" ? 1 : -1;
+      const newPosts = newData.map((x)=>{
+       if(x.id === variables.postid){
+        //  console.log(x.id)
+          return {
+            ...x,
+            likes: action === "like" ? [data.userId] : [],
+            _count: {
+              likes: x._count.likes + value,
+            },
+          }
+        }
+
+         return x
+      });
+
+      return {
+       ...newData,newPosts
+      }
+    }
+  
+    
+
+
+
+  );
+}
+
+
+const PostContainer = ( {tweet,client}:{tweet:RouterOutputs['example']['getPosts'][number];client:QueryClient}) => {
+  
+  
+  
+  let hasLiked = tweet.likes.length>0;
+  
+  
   // const {data,isLoading,error} = api.example.getUser.useQuery({text:userid});
   
   // const likes = api.example.getLikes.useQuery({id:postid});
   const trpc = api.useContext();
-
- 
+  
+       
+   const likeMutation = api.example.likePost.useMutation(
+    {
+      onSuccess: (data, variables) => {
+        updateCache({ client, variables, data,  action: "like" });
+      },
+    }
+   ).mutateAsync;
+   const unlikeMutation = api.example.unlikePost.useMutation({
+    onSuccess: (data, variables) => {
+      updateCache({ client, data, variables, action: "unlike" });
+    },
+   }).mutateAsync;
+  
   
 
 
@@ -58,7 +127,7 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
 
         
          <div className=' p-1   col-span-1 '>
-           <Image src={ author?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
+           <Image src={tweet.user.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
          </div>
 
 
@@ -67,19 +136,33 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
         <div className=' p-1 '>
 
             
-        <p className=' text-sm  font-semibold '> {author?.name }</p>
-        <p className=' text-[10px] font-extralight mb-2   '> {date?.toLocaleString()} </p>
+        <p className=' text-sm  font-semibold '> {tweet.user.name }</p>
+        <p className=' text-[10px] font-extralight mb-2   '> {tweet.createdAt?.toLocaleString()} </p>
       
-             <p className=' text-sm md:text-md  text-white/95 '>{caption}</p>
+             <p className=' text-sm md:text-md  text-white/95 '>{tweet.caption}</p>
         </div>
 
            <div className='  relative   bg-purpe-500'>
           {
-               img!=="/df"?
-<Image src={img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />:<></>
-          }
+               tweet.img &&
+<Image src={tweet.img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />          
+}
 
           
+
+         <div  className='  py-2 flex gap-2  ' > 
+              <button  className=' flex items-center gap-2'
+              onClick = {!hasLiked ? ()=>likeMutation({postid:tweet.id}):()=>unlikeMutation({postid:tweet.id})}
+              >  
+              {/* { !bool_like ?< AiOutlineHeart className=' '/>:<FcLike/>} {likes.data}  */}
+             
+
+             <AiFillHeart className={!hasLiked? "":" fill-red-600"} />{tweet._count.likes} 
+              </button>
+              
+            <div className=' flex items-center gap-2'> <BiComment/> {0}  </div>
+         </div>
+
 
       
 

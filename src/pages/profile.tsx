@@ -4,8 +4,10 @@ import { useSession } from 'next-auth/react';
 import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
 import Image from 'next/image';
+import { useQueryClient } from '@tanstack/react-query';
+import { RouterInputs } from '~/utils/api';
 const Profile = () => {
-    
+    const client = useQueryClient()
 
     const {data:useSessionData} = useSession();
     const {data,isLoading,error} = api.example.getUserPosts.useQuery();
@@ -18,7 +20,7 @@ const Profile = () => {
 
           <div className=' col-span-3'>
  
- 
+             
 
             <Image src={useSessionData?.user.image || "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_960_720.png"} height={100} width={120} unoptimized alt="" className=" border-white/10 border-2  rounded-full" />
           </ div>
@@ -38,7 +40,7 @@ const Profile = () => {
         { len > 0?
               <>{
             data?.map((post)=>(
-                <Post caption={post.caption}  author={post.user}  likesCount={post._count.likes}  hasLiked = {post.likes}  key={post.id} postid={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
+                <Post client={client}   key={post.id} tweet={post}  />
                 ))}
               </>:<div>
                 <h1 className='  text-sm text-[hsl(280,100%,70%)]'>No posts</h1>
