@@ -78,7 +78,7 @@ const PostContainer = ( {tweet,client}:{tweet:RouterOutputs['example']['getPosts
   
   
   
-  let hasLiked = tweet.likes.length>0;
+  const hasLiked = tweet.likes.length>0;
   
   
   // const {data,isLoading,error} = api.example.getUser.useQuery({text:userid});
