@@ -6,9 +6,10 @@ import Link from 'next/link'
 import { MoonLoader } from 'react-spinners'
 import { useQueryClient } from '@tanstack/react-query'
 
+const client = useQueryClient()
+
 const feed = () => {
 
-  const client = useQueryClient()
   const {data:posts,isLoading,error} = api.example.getPosts.useQuery();
   if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
   return (
