@@ -23,7 +23,7 @@ model Post{
     user              User @relation(fields: [userId],references: [id],onDelete: Cascade)
     img                String ?
     comments           Comment[]
-    liked             LikedPost[]
+    likes            LikedPost[]
 }
 
 model LikedPost{

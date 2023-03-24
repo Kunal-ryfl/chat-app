@@ -9,7 +9,7 @@ import { usePathname} from 'next/navigation'
 import Bottomnav from "./components/Bottomnav";
 
 import { Inter } from 'next/font/google'
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] })
 
@@ -62,7 +62,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <Bottomnav/>
              </div>
              </div>
-     
+     <ReactQueryDevtools/>
     </SessionProvider>
   );
 };

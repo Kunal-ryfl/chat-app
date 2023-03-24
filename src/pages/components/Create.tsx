@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { api } from '~/utils/api';
-import { postInput } from '~/types';
+import { postInput,Post } from '~/types';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+
 
 const Create = () => {
  const[post,setPost] = useState("");  
@@ -13,9 +14,47 @@ const Create = () => {
 
     const { mutate } = api.example.create.useMutation({
 	
+  onMutate:async()=>{
+    await trpc.example.getPosts.cancel()
+    const prevPosts = trpc.example.getPosts.getData()
+    
+    trpc.example.getPosts.setData(undefined, (prev) => {
+      const optimisticPost: Post = {
+      id:"fakeid",
+      img:'/fake',
+      userId:'fakeuserid',
+      createdAt: new Date(),
+      caption:'placeholder',
+      likes:[],
+      user:{id:'',name:'',image:''},
+      _count:{
+        likes:0
+      },
+        
+
+      }
+      if (!prev) return [optimisticPost]
+      return [...prev, optimisticPost]
+    })
+
+     setPost("")
+
+    return {prevPosts}
+  },
+
+
+
+  onError: (err, newPost, context) => {
+    console.error("An error occured when creating todo")
+    // Clear input
+    setPost(newPost)
+    if (!context) return
+    trpc.example.getPosts.setData(undefined, () => context.prevPosts)
+  },
+
 		// Always refetch after error or success:
 		onSettled: async () => {
-			console.log('SETTLED')
+			// console.log('SETTLED')
 			await trpc.example.getPosts.invalidate()
             
 		},
@@ -31,7 +70,7 @@ const Create = () => {
       const result = postInput.safeParse(post)
       
       if (!result.success) {
-          // toast.error(result.error.format()._errors.join('\n'))
+          console.error(result.error.format()._errors.join('\n'))
           return
       }
       

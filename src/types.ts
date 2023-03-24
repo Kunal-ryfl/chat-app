@@ -2,10 +2,10 @@ import type { inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
 import type { AppRouter } from "./server/api/root";
 
-// type RouterOutput = inferRouterOutputs<AppRouter>;
-// type allTodosOutput = RouterOutput["example"]["all"];
+type RouterOutput = inferRouterOutputs<AppRouter>;
+type allPostsOutput = RouterOutput["example"]["getPosts"];
 
-// export type Todo = allTodosOutput[number];
+export type Post = allPostsOutput[number];
 
 export const postInput = z
   .string({
@@ -13,3 +13,4 @@ export const postInput = z
   })
   .min(1)
   .max(50);
+

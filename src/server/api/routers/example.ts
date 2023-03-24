@@ -7,18 +7,51 @@ import {
 } from "~/server/api/trpc";
 
 
+
 export const exampleRouter = createTRPCRouter({
   
 
-  getPosts: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.post.findMany({
-      orderBy: [
+  getPosts: publicProcedure.query(async({ ctx }) => {
+    
+    const posts =  await ctx.prisma.post.findMany({
+     orderBy: [
         {
           createdAt: 'desc',
         },
         
       ],
+
+      include: {
+        likes: {
+          where: {
+            userId:ctx.session?.user?.id,
+          },
+          select: {
+            userId: true,
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+          },
+        },
+
+        user: {
+          select: {
+            name: true,
+            image: true,
+            id: true,
+          },
+        },
+
+      },
+    
+
     });
+
+    return  posts.map(({ id,img,user, caption,createdAt, userId ,likes,_count }) => ({ id,img,user,createdAt, caption, userId ,likes,_count }))
+      // todos.map(({ id, text, done }) => ({ id, text, done }))
+    
   }),
 
 
@@ -27,8 +60,32 @@ export const exampleRouter = createTRPCRouter({
     return ctx.prisma.user.findMany();
   }),
 
+  
+  getPostById: publicProcedure.input(z.object({postid:z.string()})).query(({ ctx }) => {
+    return ctx.prisma.post.findMany({
+      where:{
+        id:ctx.session?.user.id,
+      },
+      include: {
+        likes: {
+          where: {
+            userId:ctx.session?.user?.id,
+          },
+          select: {
+            userId: true,
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+          },
+        },
+      },
+    
+    });
+  }),
 
-   
+  
   
   getUserPosts: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.post.findMany({
@@ -42,7 +99,32 @@ export const exampleRouter = createTRPCRouter({
 
       where:{
         userId: ctx.session.user.id,
-      }
+      },
+      include: {
+        likes: {
+          where: {
+            userId:ctx.session?.user?.id,
+          },
+          select: {
+            userId: true,
+          },
+        },
+        _count: {
+          select: {
+            likes: true,
+          },
+        },
+
+        user: {
+          select: {
+            name: true,
+            image: true,
+            id: true,
+          },
+        },
+
+      },
+    
     });
   }),
 
@@ -97,8 +179,7 @@ Liked: protectedProcedure.input( z.object({ id: z.string() }) ).query(({ ctx,inp
         postId:input.id,
         userId:ctx.session.user.id,
       },
-  
-  });
+   });
 }),
   
 

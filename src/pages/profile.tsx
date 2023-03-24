@@ -38,7 +38,7 @@ const Profile = () => {
         { len > 0?
               <>{
             data?.map((post)=>(
-                <Post caption={post.caption} key={post.id} postid={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
+                <Post caption={post.caption}  author={post.user}  likesCount={post._count.likes}  hasLiked = {post.likes}  key={post.id} postid={post.id} img={post.img||"/df"} userid={post.userId} date={post.createdAt} />
                 ))}
               </>:<div>
                 <h1 className='  text-sm text-[hsl(280,100%,70%)]'>No posts</h1>
