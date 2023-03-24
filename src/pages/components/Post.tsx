@@ -21,7 +21,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
   const {mutate:likeMutation} = api.example.likePost.useMutation({
     onMutate:async ()=>{
       console.log("like fired")
-      trpc.example.getPosts.cancel() 
+   await  trpc.example.getPosts.cancel() 
       
 
       const prevPosts = trpc.example.getPosts.getData()
@@ -67,7 +67,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
   const {mutate:unlikeMutation} = api.example.unlikePost.useMutation({
     onMutate:async ()=>{
       console.log("unlike fired")
-      trpc.example.getPosts.cancel() 
+      await trpc.example.getPosts.cancel() 
       
 
       const prevPosts = trpc.example.getPosts.getData()
