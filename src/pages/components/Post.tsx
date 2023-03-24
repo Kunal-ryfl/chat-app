@@ -135,7 +135,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
         
          <div className=' p-1   col-span-1 '>
-           <Image src={tweet.user.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
+           <Image src={tweet?.user?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
          </div>
 
 
