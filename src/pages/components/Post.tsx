@@ -67,7 +67,7 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
         <div className=' p-1 '>
 
             
-        <p className=' text-sm  font-semibold '> {author.name }</p>
+        <p className=' text-sm  font-semibold '> {author?.name }</p>
         <p className=' text-[10px] font-extralight mb-2   '> {date?.toLocaleString()} </p>
       
              <p className=' text-sm md:text-md  text-white/95 '>{caption}</p>
