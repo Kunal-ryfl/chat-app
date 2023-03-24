@@ -12,7 +12,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
   
   
   
-  const hasLiked = tweet.likes.length>0;
+  const hasLiked = tweet?.likes.length>0;
   
   const trpc = api.useContext();
   
@@ -35,9 +35,9 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
             if(post.id===tweet.id){
               return ({
                 ...post,
-                likes:[{userId:tweet.userId}],
+                likes:[{userId:tweet?.userId}],
                 _count:{
-                  likes:tweet._count.likes+1
+                  likes:tweet._count?.likes+1
                 }  
 
               })
