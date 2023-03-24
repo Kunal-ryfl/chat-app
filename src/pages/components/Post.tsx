@@ -8,7 +8,7 @@ import {BiComment} from 'react-icons/bi'
 import { Post } from '~/types';
 
 type likesElement = {
- userId:String
+ userId:string
 }
 
 type authorType = {
