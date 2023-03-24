@@ -5,102 +5,110 @@ import Image from 'next/image';
 import {AiFillHeart} from 'react-icons/ai'
 import {BiComment} from 'react-icons/bi'
 
-import { InfiniteData,useQueryClient, QueryClient } from '@tanstack/react-query';
 
 
 
-
-function updateCache({
-  client,
-  variables,
-  data,
-  action,
-}: {
-  client: QueryClient;
-  
-  variables: {
-    postid: string;
-  };
-  data: {
-    userId: string;
-  };
-  action: "like" | "unlike";
-}) 
-
-
-{
-  client.setQueryData(
-    [
-      [
-        "example","getPosts"
-      ],
-      {
-        type: "query",
-      }
-    ],
-
-
-    (oldData) => {
-    //  console.log({oldData})
-     const newData = oldData as RouterOutputs["example"]["getPosts"];
-    //  console.log({newData})
-
-      const value = action === "like" ? 1 : -1;
-      const newPosts = newData.map((x)=>{
-       if(x.id === variables.postid){
-        //  console.log(x.id)
-          return {
-            ...x,
-            likes: action === "like" ? [data.userId] : [],
-            _count: {
-              likes: x._count.likes + value,
-            },
-          }
-        }
-
-         return x
-      });
-
-      return {
-       ...newData,newPosts
-      }
-    }
-  
-    
-
-
-
-  );
-}
-
-
-const PostContainer = ( {tweet,client}:{tweet:RouterOutputs['example']['getPosts'][number];client:QueryClient}) => {
+const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][number]}) => {
   
   
   
   const hasLiked = tweet.likes.length>0;
   
-  
-  // const {data,isLoading,error} = api.example.getUser.useQuery({text:userid});
-  
-  // const likes = api.example.getLikes.useQuery({id:postid});
   const trpc = api.useContext();
   
-       
-   const likeMutation = api.example.likePost.useMutation(
-    {
-      onSuccess: (data, variables) => {
-        updateCache({ client, variables, data,  action: "like" });
-      },
-    }
-   ).mutateAsync;
-   const unlikeMutation = api.example.unlikePost.useMutation({
-    onSuccess: (data, variables) => {
-      updateCache({ client, data, variables, action: "unlike" });
+  
+
+  const {mutate:likeMutation} = api.example.likePost.useMutation({
+    onMutate:async ()=>{
+      console.log("like fired")
+      trpc.example.getPosts.cancel() 
+      
+
+      const prevPosts = trpc.example.getPosts.getData()
+
+      //optimistic update
+
+      trpc.example.getPosts.setData(undefined,(x)=>{
+           if(!x) return prevPosts
+
+           return x.map(post=>{
+            if(post.id===tweet.id){
+              return ({
+                ...post,
+                likes:[{userId:tweet.userId}],
+                _count:{
+                  likes:tweet._count.likes+1
+                }  
+
+              })
+            }
+            return post
+
+           })
+      })
+
+
+      return {prevPosts}
     },
-   }).mutateAsync;
-  
-  
+
+   
+    onError: (err, done, context) => {
+			console.error(`An error occured when marking todo as ${done ? "done" : "undone"}`)
+			if (!context) return
+			trpc.example.getPosts.setData(undefined, () => context.prevPosts)
+		},
+
+    onSettled: async () => {
+			await trpc.example.getPosts.invalidate()
+		},
+
+  });
+
+  const {mutate:unlikeMutation} = api.example.unlikePost.useMutation({
+    onMutate:async ()=>{
+      console.log("unlike fired")
+      trpc.example.getPosts.cancel() 
+      
+
+      const prevPosts = trpc.example.getPosts.getData()
+
+      //optimistic update
+
+      trpc.example.getPosts.setData(undefined,(x)=>{
+           if(!x) return prevPosts
+
+           return x.map(post=>{
+            if(post.id===tweet.id){
+              return ({
+                ...post,
+                likes:[],
+                _count:{
+                  likes:tweet._count.likes-1
+                }  
+
+              })
+            }
+            return post
+
+           })
+      })
+
+
+      return {prevPosts}
+    },
+
+   
+    onError: (err, done, context) => {
+			console.error(`An error occured when marking todo as ${done ? "done" : "undone"}`)
+			if (!context) return
+			trpc.example.getPosts.setData(undefined, () => context.prevPosts)
+		},
+
+    onSettled: async () => {
+			await trpc.example.getPosts.invalidate()
+		},
+
+  });
 
 
 

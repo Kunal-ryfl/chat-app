@@ -2,14 +2,17 @@ import React from 'react'
 import Create from './components/Create'
 import Post from './components/Post'
 import { api } from '~/utils/api'
-import Link from 'next/link'
 import { MoonLoader } from 'react-spinners'
-import { useQueryClient } from '@tanstack/react-query'
+
+
+
+
+
 
 
 const Feed = () => {
-  const client = useQueryClient()
 
+  
   const {data:posts,isLoading,error} = api.example.getPosts.useQuery();
   if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
   return (
@@ -24,7 +27,7 @@ const Feed = () => {
       posts?.length  &&
            posts?.map((post)=>(
         
-        <Post client={client}    tweet={post} key={post.id} />
+        <Post   tweet={post} key={post.id} />
       ))
     }
 

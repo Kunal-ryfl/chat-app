@@ -5,7 +5,7 @@ import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
 import Image from 'next/image';
 import { useQueryClient } from '@tanstack/react-query';
-import { RouterInputs } from '~/utils/api';
+
 const Profile = () => {
     const client = useQueryClient()
 
@@ -40,7 +40,7 @@ const Profile = () => {
         { len > 0?
               <>{
             data?.map((post)=>(
-                <Post client={client}   key={post.id} tweet={post}  />
+                <Post    key={post.id} tweet={post}  />
                 ))}
               </>:<div>
                 <h1 className='  text-sm text-[hsl(280,100%,70%)]'>No posts</h1>
