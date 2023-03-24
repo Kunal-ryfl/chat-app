@@ -144,15 +144,15 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
         <div className=' p-1 '>
 
             
-        <p className=' text-sm  font-semibold '> {tweet.user.name }</p>
-        <p className=' text-[10px] font-extralight mb-2   '> {tweet.createdAt?.toLocaleString()} </p>
+        <p className=' text-sm  font-semibold '> {tweet?.user?.name }</p>
+        <p className=' text-[10px] font-extralight mb-2   '> {tweet?.createdAt?.toLocaleString()} </p>
       
-             <p className=' text-sm md:text-md  text-white/95 '>{tweet.caption}</p>
+             <p className=' text-sm md:text-md  text-white/95 '>{tweet?.caption}</p>
         </div>
 
            <div className='  relative   bg-purpe-500'>
           {
-               tweet.img &&
+               tweet?.img &&
 <Image src={tweet.img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />          
 }
 
@@ -165,7 +165,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
               {/* { !bool_like ?< AiOutlineHeart className=' '/>:<FcLike/>} {likes.data}  */}
              
 
-             <AiFillHeart className={!hasLiked? "":" fill-red-600"} />{tweet._count.likes} 
+             <AiFillHeart className={!hasLiked? "":" fill-red-600"} />{tweet?._count.likes} 
               </button>
               
             <div className=' flex items-center gap-2'> <BiComment/> {0}  </div>
