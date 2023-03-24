@@ -44,7 +44,7 @@ const Create = () => {
 
 
 
-  onError: (err, newPost, context) => {
+  onError:(err, newPost, context) => {
     console.error("An error occured when creating todo")
     // Clear input
     setPost(newPost)
@@ -53,7 +53,7 @@ const Create = () => {
   },
 
 		// Always refetch after error or success:
-		onSettled: async () => {
+		onSettled:async () => {
 			// console.log('SETTLED')
 			await trpc.example.getPosts.invalidate()
             

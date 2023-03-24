@@ -68,7 +68,7 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
         return {prevPosts}
       },
 
-    onSettled: async () => {
+    onSettled:async () => {
       // console.log('Liked') 
       
     
@@ -122,7 +122,7 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
 
 
 
-    onSettled: async () => {
+    onSettled:async () => {
       console.log('unLiked') 
 
       // await trpc.example.Liked.invalidate()
