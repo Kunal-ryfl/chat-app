@@ -8,7 +8,7 @@ import {BiComment} from 'react-icons/bi'
 import { Post } from '~/types';
 
 type likesElement = {
- userId:String
+ userId:string
 }
 
 type authorType = {
@@ -30,7 +30,7 @@ const PostContainer = (post:{caption:string, author:authorType , hasLiked:likesE
   // const likes = api.example.getLikes.useQuery({id:postid});
   const trpc = api.useContext();
 
-  var liked = post?.hasLiked?.length > 0;
+  // let liked = post?.hasLiked?.length > 0;
    
        
   const { mutate: likeMutation} = api.example.likePost.useMutation({
