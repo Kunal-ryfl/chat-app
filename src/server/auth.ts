@@ -36,10 +36,12 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+ 
   callbacks: {
     session({ session, user }) {
       if (session.user) {
-        session.user.id = user.id;
+        session.user.id = user.id 
+        // session.user.id= token as any;
         // session.user.role = user.role; <-- put other properties on the session here
       }
       return session;
@@ -74,10 +76,14 @@ export const authOptions: NextAuthOptions = {
   ],
 
   
+  
 
   pages:{
     signIn:'/signin'
   }
+
+
+
 };
 
 /**

@@ -4,11 +4,12 @@ import Post from './components/Post'
 import { api } from '~/utils/api'
 import { MoonLoader } from 'react-spinners'
 
-
+import { useSession } from 'next-auth/react'
 
 const Feed = () => {
 
-  
+  const sessionData = useSession();
+  console.log(sessionData); 
   const {data:posts,isLoading,error} = api.example.getPosts.useQuery();
   if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
   return (
