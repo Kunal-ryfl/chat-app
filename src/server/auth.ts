@@ -44,6 +44,7 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+
   },
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -71,6 +72,8 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+
+  
 
   pages:{
     signIn:'/signin'

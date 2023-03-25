@@ -4,17 +4,16 @@ import { useSession } from 'next-auth/react';
 import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
 import Image from 'next/image';
-import { useQueryClient } from '@tanstack/react-query';
+
 
 const Profile = () => {
-    const client = useQueryClient()
-
+   
     const {data:useSessionData} = useSession();
     const {data,isLoading,error} = api.example.getUserPosts.useQuery();
     const len:number = data?.length || 0;
     if(isLoading) return<> <MoonLoader color='purple' className=' mx-auto my-10'/> </>
   return (
-    <div className=' min-h-screen px-2 pb-16 py-2  text-white bg-black'>
+    <div className=' min-h-screen md:px-2 pb-16   text-white bg-black'>
         
         <div className='  grid-rows-3   rounded-sm  w-full md:w-[600px] grid grid-cols-10     ' >
 
@@ -42,7 +41,7 @@ const Profile = () => {
 
       <div className='  py-4'>
 
-        <h1 className='  font-bold'>Posts ({len})</h1>
+        <h1 className=' px-2  font-bold'>Posts ({len})</h1>
 
         { len > 0?
               <>{

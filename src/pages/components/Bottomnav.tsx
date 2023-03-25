@@ -8,7 +8,7 @@ import { usePathname} from 'next/navigation'
 const Bottomnav = () => {
     const pathname = usePathname()
   return (
-    <div className=' xl:hidden block '>
+    <div className=' md:hidden block '>
         
         <div className="btm-nav">
   <button className="text-primary">
