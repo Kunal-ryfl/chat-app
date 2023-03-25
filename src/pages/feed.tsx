@@ -6,10 +6,6 @@ import { MoonLoader } from 'react-spinners'
 
 
 
-
-
-
-
 const Feed = () => {
 
   
@@ -36,5 +32,7 @@ const Feed = () => {
      
   )
 }
+
+
 
 export default Feed

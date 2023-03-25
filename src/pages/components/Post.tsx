@@ -1,11 +1,32 @@
 import React from 'react'
 import { api, RouterOutputs } from '~/utils/api';
 import Image from 'next/image';
-
 import {AiFillHeart} from 'react-icons/ai'
 import {BiComment} from 'react-icons/bi'
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import updateLocal from "dayjs/plugin/updateLocale";
 
+dayjs.extend(relativeTime);
+dayjs.extend(updateLocal);
 
+dayjs.updateLocale("en", {
+  relativeTime: {
+    future: "in %s",
+    past: "%s",
+    s: "1m",
+    m: "1m",
+    mm: "%dm",
+    h: "1h",
+    hh: "%dh",
+    d: "1d",
+    dd: "%dd",
+    M: "1M",
+    MM: "%dM",
+    y: "1y",
+    yy: "%dy",
+  },
+});
 
 
 const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][number]}) => {
@@ -135,7 +156,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
         
          <div className=' p-1   col-span-1 '>
-           <Image src={tweet?.user?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-full border-white/10 border-2 " />
+           <Image src={tweet?.user?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3 rounded-md border-white/10 border-2 " />
          </div>
 
 
@@ -145,7 +166,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
             
         <p className=' text-sm  font-semibold '> {tweet?.user?.name }</p>
-        <p className=' text-[10px] font-extralight mb-2   '> {tweet?.createdAt?.toLocaleString()} </p>
+        <p className=' text-[10px] font-extralight mb-2   '>  {dayjs(tweet?.createdAt).fromNow()} </p>
       
              <p className=' text-sm md:text-md  text-white/95 '>{tweet?.caption}</p>
         </div>
@@ -158,17 +179,15 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
           
 
-         <div  className='  py-2 flex gap-2  ' > 
+         <div  className='  py-2 flex gap-2 text-white/60  ' > 
               <button  className=' flex items-center gap-2'
               onClick = {!hasLiked ? ()=>likeMutation({postid:tweet.id}):()=>unlikeMutation({postid:tweet.id})}
-              >  
-              {/* { !bool_like ?< AiOutlineHeart className=' '/>:<FcLike/>} {likes.data}  */}
-             
+              >   
 
-             <AiFillHeart className={!hasLiked? "":" fill-red-600"} />{tweet?._count?.likes} 
+             <AiFillHeart className={!hasLiked? " text-xl":" fill-red-600 text-xl"} />{tweet?._count?.likes} 
               </button>
               
-            <div className=' flex items-center gap-2'> <BiComment/> {0}  </div>
+            <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/> {0}  </div>
          </div>
 
 

@@ -29,7 +29,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
 <div className=' grid-cols-1  grid xl:grid-cols-10  min-h-screen bg-black'>
         
-        <div className=' text-white flex justify-center col-span-2 '>
+        <div className=' text-white flex justify-end col-span-2 '>
             
            
 

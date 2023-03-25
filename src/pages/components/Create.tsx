@@ -61,7 +61,7 @@ const Create = () => {
 	});  
     
   return (
-    <form className=' flex items-center my-2 border-white/10 border-2 px-2  py-4 '
+    <form className=' sticky top-0 backdrop-blur-md z-10 flex items-center my-2 border-white/10 border-2 px-2  py-4 '
     onSubmit={(e) => {
       e.preventDefault()
       
