@@ -4,9 +4,14 @@ import {CgProfile} from "react-icons/cg"
 import {AiOutlineHome} from "react-icons/ai"
 import {IoMdNotificationsOutline} from "react-icons/io"
 import { usePathname} from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 const Bottomnav = () => {
-    const pathname = usePathname()
+  const {data:session} = useSession();
+  if(session===null) return <></>;
+
+  const pathname = usePathname()
+
   return (
     <div className=' md:hidden block '>
         
