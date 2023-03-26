@@ -6,8 +6,8 @@ import {IoMdNotificationsOutline} from "react-icons/io"
 import { usePathname} from 'next/navigation'
 import { useSession } from 'next-auth/react'
 const SideBar = () => {
-    const {data:session} = useSession();
     const pathname = usePathname()
+    const {data:session} = useSession();
     if(session===null) return     <div className=' opacity-0  text-white flex justify-start xl:justify-end col-span-2 '>
             
     <div className=' hidden md:sticky top-10 my-4 gap-3   px-2   text-2xl  py-4 h-fit md:grid   grid-cols-3 md:grid-cols-1 rounded-sm  '>

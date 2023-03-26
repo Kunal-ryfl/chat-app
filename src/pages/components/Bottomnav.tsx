@@ -7,10 +7,10 @@ import { usePathname} from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
 const Bottomnav = () => {
+  const pathname = usePathname()
   const {data:session} = useSession();
   if(session===null) return <></>;
 
-  const pathname = usePathname()
 
   return (
     <div className=' md:hidden block '>
