@@ -2,8 +2,9 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { GetServerSidePropsContext } from "next";
+import { getServerAuthSession } from "~/server/auth";
 
-import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
 
@@ -60,3 +61,19 @@ const AuthShowcase: React.FC = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(ctx:GetServerSidePropsContext) {
+  const session = await getServerAuthSession(ctx)
+
+  console.log("mid = ",session)
+     if(!session){
+      return{
+          redirect:{destination:"/signin",permanent:false},
+          props:{}
+      }
+     }
+
+  return {
+    props: {session,}, // will be passed to the page component as props
+  }
+}

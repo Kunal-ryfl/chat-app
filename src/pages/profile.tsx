@@ -4,7 +4,8 @@ import { useSession } from 'next-auth/react';
 import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
 import Image from 'next/image';
-
+import { GetServerSidePropsContext } from "next";
+import { getServerAuthSession } from "~/server/auth";
 
 const Profile = () => {
    
@@ -59,6 +60,23 @@ const Profile = () => {
         </div>
 
   )
+}
+
+
+export async function getServerSideProps(ctx:GetServerSidePropsContext) {
+  const session = await getServerAuthSession(ctx)
+
+  console.log("mid = ",session)
+     if(!session){
+      return{
+          redirect:{destination:"/signin",permanent:false},
+          props:{}
+      }
+     }
+
+  return {
+    props: {session,}, // will be passed to the page component as props
+  }
 }
 
 export default Profile
