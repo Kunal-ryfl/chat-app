@@ -6,6 +6,7 @@ import {BiComment} from 'react-icons/bi'
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocal from "dayjs/plugin/updateLocale";
+import toast from 'react-hot-toast';
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocal);
@@ -30,18 +31,15 @@ dayjs.updateLocale("en", {
 
 
 const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][number]}) => {
-  
-  
+
+    
   
   const hasLiked = tweet?.likes.length>0;
-  
   const trpc = api.useContext();
   
-  
-
   const {mutate:likeMutation} = api.example.likePost.useMutation({
     onMutate:async ()=>{
-      console.log("like fired")
+      // console.log("like fired")
    await  trpc.example.getPosts.cancel() 
       
 
@@ -73,8 +71,8 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
     },
 
    
-    onError: (err, done, context) => {
-			console.error(`An error occured when marking todo as ${done ? "done" : "undone"}`)
+    onError: (err,id,context) => {
+			toast.error(`An error occured when liking post`)
 			if (!context) return
 			trpc.example.getPosts.setData(undefined, () => context.prevPosts)
 		},
@@ -87,7 +85,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
   const {mutate:unlikeMutation} = api.example.unlikePost.useMutation({
     onMutate:async ()=>{
-      console.log("unlike fired")
+      // console.log("unlike fired")
       await trpc.example.getPosts.cancel() 
       
 
@@ -119,8 +117,8 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
     },
 
    
-    onError: (err, done, context) => {
-			console.error(`An error occured when marking todo as ${done ? "done" : "undone"}`)
+    onError: (err, id, context) => {
+			toast.error(`An error occured when unliking post`)
 			if (!context) return
 			trpc.example.getPosts.setData(undefined, () => context.prevPosts)
 		},
