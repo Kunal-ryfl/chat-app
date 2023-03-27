@@ -18,11 +18,14 @@ import { prisma } from "~/server/db";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id: string;
+      id: string,
+      accessToken:string,
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
+    
   }
+  
 
   // interface User {
   //   // ...other properties
@@ -37,9 +40,14 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
 
-  callbacks: {
-    session({ session, user }) {
+  callbacks: { 
+    session({ session, user}) {
+
+      // console.log("token ",token)
+
       if (session.user) {
+        // session.user = token
+        
         session.user.id = user.id 
         // session.user.id= token as any;
         // session.user.role = user.role; <-- put other properties on the session here

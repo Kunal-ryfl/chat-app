@@ -1,12 +1,10 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
-import {CgProfile} from "react-icons/cg"
-import {AiOutlineHome} from "react-icons/ai"
-import {IoMdNotificationsOutline} from "react-icons/io"
+
 import { usePathname} from 'next/navigation'
 import Bottomnav from "./components/Bottomnav";
 import { Inter } from 'next/font/google'
@@ -20,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
   
 }) => {
-  const pathname = usePathname()
+  // const pathname = usePathname()
  
   return (
     
@@ -38,7 +36,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
      
         
       <Component {...pageProps}  />
-     
+     <Toaster/>
         </div>
         <div className='  col-span-2'>
      

@@ -38,19 +38,19 @@ const Feed = () => {
 
 
 
-export async function getServerSideProps(ctx:GetServerSidePropsContext) {
-  const session = await getServerAuthSession(ctx)
+// export async function getServerSideProps(ctx:GetServerSidePropsContext) {
+//   const session = await getServerAuthSession(ctx)
 
-  console.log("mid = ",session)
-     if(!session){
-      return{
-          redirect:{destination:"/signin",permanent:false},
-          props:{}
-      }
-     }
+//   console.log("mid = ",session)
+//      if(!session){
+//       return{
+//           redirect:{destination:"/signin",permanent:false},
+//           props:{}
+//       }
+//      }
 
-  return {
-    props: {session,}, // will be passed to the page component as props
-  }
-}
+//   return {
+//     props: {session,}, // will be passed to the page component as props
+//   }
+// }
 export default Feed
