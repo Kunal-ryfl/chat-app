@@ -36,6 +36,7 @@ const Profile = () => {
 
         <h1 className=' text-base md:text-2xl'>{useSessionData?.user.name}</h1>
         <h1 className=' text-[11px] md:text-sm text-gray-400'>{useSessionData?.user.email}</h1>
+        
           </div>
 
         </div>
