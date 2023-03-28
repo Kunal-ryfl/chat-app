@@ -34,8 +34,6 @@ dayjs.updateLocale("en", {
 
 const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][number]}) => {
 
-    
-  
   const hasLiked = tweet?.likes.length>0;
   const trpc = api.useContext();
   
@@ -183,7 +181,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
          <div  className='  py-2 flex gap-2 text-white/60  ' > 
               <button  className=' flex items-center gap-2'
-              onClick = {!hasLiked ? ()=>likeMutation({postid:tweet.id}):()=>unlikeMutation({postid:tweet.id})}
+              onClick = {!hasLiked ? ()=>likeMutation({postid:tweet.id}):()=>unlikeMutation({postid:tweet?.id})}
               >   
 
              <AiFillHeart className={!hasLiked? " text-xl":" fill-red-600 text-xl"} />{tweet?._count?.likes} 
@@ -192,9 +190,9 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
             <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/> {0}  </div>
          </div>
 
-         <CreateComment  postId = {tweet.id}/>
+         <CreateComment  postId = {tweet?.id}/>
 
-         <Link href={`/post/${tweet.id}`}>
+         <Link href={`/post/${tweet?.id}`}>
       <p className=' text-sm'>Show comments</p>
          </Link>
 
