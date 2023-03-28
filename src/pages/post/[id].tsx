@@ -4,7 +4,7 @@ import { MoonLoader } from 'react-spinners'
 import { useRouter } from 'next/router'
 import Comment from '../components/Comment'
 
-const page = (  ) => {
+const Page = (  ) => {
 
   const router = useRouter()
   const query = router.query.id as string 
@@ -37,4 +37,4 @@ const page = (  ) => {
   )
 }
 
-export default page
+export default Page
