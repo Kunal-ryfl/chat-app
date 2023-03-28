@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { postInput } from "~/types";
+import { postInput,commentInput } from "~/types";
 import {
   createTRPCRouter,
   publicProcedure,
@@ -132,11 +132,38 @@ export const exampleRouter = createTRPCRouter({
     });
   
   }),
-
-
   
-
+  createComment : protectedProcedure.input(commentInput).mutation(async({ctx,input})=>{
+    return ctx.prisma.comment.create({
+      data: {
+        caption: input.comment,
+        
+        user: {
+          connect: {
+            id: ctx.session.user.id,
+          },
+        },
+        Post:{
+          connect:{
+            id:input.postId
+          }
+        }
+      },
+    });
   
+  }),
+
+
+
+  getPostById:protectedProcedure.input(z.string()).query(async({ctx,input})=>{
+ 
+    return ctx.prisma.comment.findMany({
+      where:{
+        Postid:input
+      }
+    })
+     
+  }),  
 
   
   likePost: protectedProcedure.input( z.object({ postid:z.string() }) ).mutation(async({ ctx,input }) => {

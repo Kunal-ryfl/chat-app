@@ -14,3 +14,8 @@ export const postInput = z
   .min(1)
   .max(50);
 
+export const commentInput =
+ z.object({comment:z.string({required_error: "Describe your post",}).min(1).max(100),
+postId:z.string().min(1)}
+);
+

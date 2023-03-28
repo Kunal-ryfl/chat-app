@@ -3,11 +3,11 @@ import React from 'react'
 import {CgProfile} from "react-icons/cg"
 import {AiOutlineHome} from "react-icons/ai"
 import {IoMdNotificationsOutline} from "react-icons/io"
-import { usePathname} from 'next/navigation'
 import { useSession } from 'next-auth/react'
-
+import { useRouter } from 'next/router'
 const Bottomnav = () => {
-  const pathname = usePathname()
+
+  const {asPath} = useRouter()
   const {data:session} = useSession();
   if(session===null) return <></>;
 
@@ -46,17 +46,17 @@ const Bottomnav = () => {
 <div className="btm-nav bg-black">
   <button className=" border-white/10 border-t-2  text-2xl text-white">
 <Link href={"/feed"}>
-<AiOutlineHome className={pathname.substring(1)==='feed'?" text-[hsl(280,100%,70%)]":""}  />
+<AiOutlineHome className={asPath ==='/feed'?" text-[hsl(280,100%,70%)]":""}  />
   </Link>
   </button>
   <button className="border-white/10 border-t-2 text-white text-2xl">
     <Link href={"/"}>
-<IoMdNotificationsOutline className={pathname.substring(1)===''?" text-[hsl(280,100%,70%)]":""}/> 
+<IoMdNotificationsOutline className={asPath===''?" text-[hsl(280,100%,70%)]":""}/> 
    </Link>
   </button>
   <button className="border-white/10 border-t-2 text-white text-2xl">
   <Link href={"/profile"}>
-<CgProfile className={pathname.substring(1)==='profile'?" text-[hsl(280,100%,70%)]":""} /> 
+<CgProfile className={asPath==='profile'?" text-[hsl(280,100%,70%)]":""} /> 
   </Link>
   </button>
 </div>

@@ -7,6 +7,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocal from "dayjs/plugin/updateLocale";
 import toast from 'react-hot-toast';
+import Link from 'next/link';
+import CreateComment from './CreateComment';
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocal);
@@ -149,6 +151,8 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
   
   return (
     
+    
+    
         
         <div className=' rounded-sm border-white/10 border-t-2 md:border-x-2 b  w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
 
@@ -188,8 +192,12 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
             <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/> {0}  </div>
          </div>
 
+         <CreateComment  postId = {tweet.id}/>
 
-      
+         <Link href={`/post/${tweet.id}`}>
+      <p className=' text-sm'>Show comments</p>
+         </Link>
+
 
             </div>  
 
