@@ -29,7 +29,7 @@ const Page = (  ) => {
 
        { data && data.length > 0 &&   
         data?.map((comment)=>(
-          <Comment caption={comment.caption}  key={comment.id}/>
+          <Comment caption={comment?.caption}  key={comment?.id}/>
         ))
        }
 
