@@ -26,11 +26,11 @@ const CreateComment = (post:{postId:string }) => {
     mutate({postId:postId,comment:comment})
     
   }}
-  className=" my-2"
+  className=" my-2 "
 >
 
   <div className="input-group ">
-    <input type="text" value={comment} placeholder="add a comment..." className="input input-bordered bg-white/10"
+    <input type="text" value={comment} placeholder="add a comment..." className="input input-bordered w-full md:w-64 bg-white/10"
      onChange={(e)=>setComment(e.target.value)}
      
     />

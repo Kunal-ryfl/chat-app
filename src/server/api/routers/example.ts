@@ -160,7 +160,16 @@ export const exampleRouter = createTRPCRouter({
     return ctx.prisma.comment.findMany({
       where:{
         Postid:input
-      }
+      },
+      include:{
+        user: {
+          select: {
+            name: true,
+            image: true,
+            id: true,
+          },
+        },
+      },
     })
      
   }),  

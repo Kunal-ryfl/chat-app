@@ -3,7 +3,9 @@ import { api } from '~/utils/api';
 import { useSession } from 'next-auth/react';
 import Post from './components/Post'
 import { MoonLoader } from 'react-spinners'
+import {AiOutlineEdit} from 'react-icons/ai'
 import Image from 'next/image';
+
 import { GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "~/server/auth";
 
@@ -15,9 +17,8 @@ const Profile = () => {
     if(isLoading) return<> <MoonLoader color='purple' className=' mx-auto my-10'/> </>
   return (
     <div className=' min-h-screen md:px-2 pb-16   text-white bg-black'>
-        
+      
         <div className='  grid-rows-3   rounded-sm  w-full md:w-[600px] grid grid-cols-10     ' >
-
        <div className=' row-span-2  rounded-sm  bg-white/10 col-span-full'>
               
        </div>
@@ -36,6 +37,18 @@ const Profile = () => {
 
         <h1 className=' text-base md:text-2xl'>{useSessionData?.user.name}</h1>
         <h1 className=' text-[11px] md:text-sm text-gray-400'>{useSessionData?.user.email}</h1>
+        
+        <label htmlFor="my-modal-3" className="btn bg-inherit float-right"><AiOutlineEdit/></label>
+
+{/* Put this part before </body> tag */}
+<input type="checkbox" id="my-modal-3" className="modal-toggle" />
+<div className="modal overflow-hidden backdrop-blur-md">
+  <div className="modal-box relative  bg-slate-900 rounded-md">
+    <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <h3 className="text-lg font-bold">Edit profile</h3>
+    <p className="py-4 text-white/60  "> comming soon!</p>
+  </div>
+</div>
         
           </div>
 
