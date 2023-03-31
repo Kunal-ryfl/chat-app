@@ -33,17 +33,6 @@ type user ={
 
 const Comment = ( comment:{caption:string,author:user,createdAt:Date}) => {
   return (
-//     <div className='rounded-sm border-white/10 border-t-2 md:border-x-2 b  w-full md:w-[600px]     p-2 '>
-//         <p className=' text-[10px] font-extralight mb-2   '>  {dayjs(comment?.createdAt).fromNow()} </p>
-//         <p>{comment?.caption}</p>
-//         <p>by {comment?.author?.name}</p>
-//         {
-//                comment?.author?.image &&
-// <Image src={comment?.author?.image} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />          
-// }
-//         </div>
-
-
         
 <div className=' rounded-sm border-white/10 border-t-2 md:border-x-2 b  w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
 

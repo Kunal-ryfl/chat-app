@@ -56,7 +56,8 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
                 ...post,
                 likes:[{userId:tweet?.userId}],
                 _count:{
-                  likes:tweet._count?.likes+1
+                  likes:tweet._count?.likes+1,
+                  comments:tweet._count.comments,
                 }  
 
               })
@@ -102,7 +103,8 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
                 ...post,
                 likes:[],
                 _count:{
-                  likes:tweet._count.likes-1
+                  likes:tweet._count.likes-1,
+                  comments:tweet._count.comments,
                 }  
 
               })
@@ -136,10 +138,10 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
         
          <div className=' p-1   col-span-1 '>
+          <Link href={`/profile/${tweet.user.id}`}>
            <Image src={tweet?.user?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3  rounded-md border-white/10 border-2 " />
+          </Link>
          </div>
-
-
 
          <div className=' grid grid-rows-10   col-span-9'>
         <div className=' p-1 '>
@@ -166,7 +168,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
              <AiFillHeart className={!hasLiked? " text-xl":" fill-red-600 text-xl"} />{tweet?._count?.likes} 
               </button>
               
-            <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/>   </div>
+            <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/> {tweet?._count?.comments}   </div>
          </div>
 
          <CreateComment  postId = {tweet?.id}/>

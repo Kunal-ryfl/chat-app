@@ -33,7 +33,8 @@ const Create = () => {
       likes:[],
       user:{id:'',name:'',image:''},
       _count:{
-        likes:0
+        likes:0,
+        comments:0,
       },
         
 

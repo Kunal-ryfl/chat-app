@@ -3,7 +3,9 @@ import { api } from '~/utils/api'
 import { MoonLoader } from 'react-spinners'
 import { useRouter } from 'next/router'
 import Comment from '../components/Comment'
-
+import {FcPortraitMode} from 'react-icons/fc'
+import {FaUserAstronaut} from 'react-icons/fa'
+import {GiAstronautHelmet} from 'react-icons/gi'
 const Page = (  ) => {
 
   const router = useRouter()
@@ -16,7 +18,7 @@ const Page = (  ) => {
   if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
 
   return (
-    <div className='  pb-16 py-2'   >
+    <div className='  pb-16 py-2 min-h-screen'   >
     <div className=' w-full   border-white/10 px-2   py-4'>
        <h1 className=' text-2xl font-bold'>Comments</h1>
     </div>
@@ -24,7 +26,11 @@ const Page = (  ) => {
      
       {
         data && data.length < 1 &&
-        <div className='  w-full md:w-[600px]     p-2'><h1>No comments</h1> </div>
+        <div className='  w-full md:w-[600px]     p-2'>
+            <GiAstronautHelmet className=' text-9xl animate-pulse mx-auto  mt-20'/>
+          <h1 className=' text-center text-xl '>silence</h1>
+          <p className=' text-center text-white/60 my-5'>No comments</p>
+             </div>
       }
 
        { data && data.length > 0 &&   

@@ -55,8 +55,8 @@ const Bottomnav = () => {
    </Link>
   </button>
   <button className="border-white/10 border-t-2 text-white text-2xl">
-  <Link href={"/profile"}>
-<CgProfile className={asPath==='/profile'?" text-[hsl(280,100%,70%)]":""} /> 
+  <Link href={`/profile/${session?.user?.id}`}>
+<CgProfile className={asPath===`/profile/${session?.user?.id}`?" text-[hsl(280,100%,70%)]":""} /> 
   </Link>
   </button>
 </div>

@@ -33,7 +33,9 @@ export const exampleRouter = createTRPCRouter({
         _count: {
           select: {
             likes: true,
+            comments:true,
           },
+          
         },
 
         user: {
@@ -58,7 +60,7 @@ export const exampleRouter = createTRPCRouter({
    
   
   
-  getUserPosts: protectedProcedure.query(({ ctx }) => {
+  getUserPosts: protectedProcedure.input(z.object({userId:z.string()})).query(({ ctx,input }) => {
     return ctx.prisma.post.findMany({
       orderBy: [
         {
@@ -69,12 +71,12 @@ export const exampleRouter = createTRPCRouter({
       ],
 
       where:{
-        userId: ctx.session.user.id,
+        userId: input.userId,
       },
       include: {
         likes: {
           where: {
-            userId:ctx.session?.user?.id,
+            userId:input.userId,
           },
           select: {
             userId: true,
@@ -83,6 +85,7 @@ export const exampleRouter = createTRPCRouter({
         _count: {
           select: {
             likes: true,
+            comments:true,
           },
         },
 
@@ -103,11 +106,7 @@ export const exampleRouter = createTRPCRouter({
   
 
   getUser:protectedProcedure.input(z.object({ text: z.string() })).query(async({ctx,input})=>{
-
     return ctx.prisma.user.findUnique({
-      
-      
-      
       where: {
 
         id:input.text
