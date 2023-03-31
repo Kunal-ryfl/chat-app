@@ -51,13 +51,13 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
            if(!x) return prevPosts
 
            return x.map(post=>{
-            if(post.id===tweet.id){
+            if(post.id===tweet?.id){
               return ({
                 ...post,
                 likes:[{userId:tweet?.userId}],
                 _count:{
                   likes:tweet._count?.likes+1,
-                  comments:tweet._count.comments,
+                  comments:tweet._count?.comments,
                 }  
 
               })
@@ -98,13 +98,13 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
            if(!x) return prevPosts
 
            return x.map(post=>{
-            if(post.id===tweet.id){
+            if(post.id===tweet?.id){
               return ({
                 ...post,
                 likes:[],
                 _count:{
                   likes:tweet._count.likes-1,
-                  comments:tweet._count.comments,
+                  comments:tweet._count?.comments,
                 }  
 
               })
@@ -138,7 +138,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
 
         
          <div className=' p-1   col-span-1 '>
-          <Link href={`/profile/${tweet.user.id}`}>
+          <Link href={`/profile/${tweet?.user?.id}`}>
            <Image src={tweet?.user?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3  rounded-md border-white/10 border-2 " />
           </Link>
          </div>
@@ -162,7 +162,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
           
          <div  className='  py-2 flex gap-2 text-white/60  ' > 
               <button  className=' flex items-center gap-2'
-              onClick = {!hasLiked ? ()=>likeMutation({postid:tweet.id}):()=>unlikeMutation({postid:tweet?.id})}
+              onClick = {!hasLiked ? ()=>likeMutation({postid:tweet?.id}):()=>unlikeMutation({postid:tweet?.id})}
               >   
 
              <AiFillHeart className={!hasLiked? " text-xl":" fill-red-600 text-xl"} />{tweet?._count?.likes} 
