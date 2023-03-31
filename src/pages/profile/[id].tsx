@@ -7,7 +7,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const page = () => {
+const Profile = () => {
   const router = useRouter();
   const query = router.query.id as string;
   console.log("Q = ", query);
@@ -92,4 +92,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Profile;
