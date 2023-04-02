@@ -2,20 +2,67 @@ import React, { useState } from 'react'
 import { api } from '~/utils/api';
 import { commentInput } from '~/types';
 import toast from 'react-hot-toast'
+import { RouterOutputs } from '~/utils/api';
 
-const CreateComment = (post:{postId:string }) => {
-    
-    const {mutate} = api.example.createComment.useMutation();
-    const {postId} = post
+
+const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][number]} ) => {
+  const {id} = tweet
   const [comment,setComment] = useState("");
+
+  const trpc = api.useContext();
+    const {mutate} = api.example.createComment.useMutation({
+      onMutate:async()=>{
+        
+        
+       await trpc.example.getPosts.cancel();
+       
+
+       const prevPosts = trpc.example.getPosts.getData()
+       
+       trpc.example.getPosts.setData(undefined,(x)=>{
+        if(!x) return prevPosts
+
+        return x.map(post=>{
+         if(post.id===tweet?.id){
+           return ({
+             ...post,
+             _count:{
+               likes:tweet?._count?.likes,
+               comments:tweet._count?.comments+1,
+             }  
+
+           })
+         }
+         return post
+
+        })
+   })
    
+   setComment("")
+   toast.success("Comment added")
+   
+   return {prevPosts}
+      },
+
+      
+      onError: (err, id, context) => {
+        toast.error(`An error occured when commenting post`)
+        if (!context) return
+        trpc.example.getPosts.setData(undefined, () => context.prevPosts)
+      },
+  
+      onSettled: async () => {
+        await trpc.example.getPosts.invalidate()
+      },
+    });
+  
   return (
  
 <form 
  onSubmit={(e) => {
     e.preventDefault()
     
-    const result = commentInput.safeParse({postId:postId,comment:comment})
+    const result = commentInput.safeParse({postId:id,comment:comment})
     
     if (!result.success) {
       toast.error(result.error.format()._errors.join('\n'))
@@ -23,7 +70,7 @@ const CreateComment = (post:{postId:string }) => {
     }
     
 
-    mutate({postId:postId,comment:comment})
+    mutate({postId:id,comment:comment})
     
   }}
   className=" my-2 "

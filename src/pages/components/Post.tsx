@@ -134,7 +134,7 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
   
   return (
         
-        <div className=' rounded-sm border-white/10 border-t-2 md:border-x-2 b  w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
+        <div className=' rounded-sm border-white/10 border-y-2 md:border-x-2 b  w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
 
         
          <div className=' p-1   col-span-1 '>
@@ -146,21 +146,25 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
          <div className=' grid grid-rows-10   col-span-9'>
         <div className=' p-1 '>
 
-            
-        <p className=' text-sm  font-semibold '> {tweet?.user?.name }</p>
-        <p className=' text-[10px] font-extralight mb-2   '>  {dayjs(tweet?.createdAt).fromNow()} </p>
+            <div className=' flex items-baseline gap-2'>
+
+        <p className=' text-base  font-semibold '> {tweet?.user?.name }</p>
+        <p className=' text-sm font-extralight  '>  {dayjs(tweet?.createdAt).fromNow()} </p>
+            </div>
       
-             <p className=' text-sm md:text-md  text-white/95 '>{tweet?.caption}</p>
+             <p className=' text-base md:text-md  text-white/95 '>{tweet?.caption}</p>
         </div>
 
-           <div className='  relative   bg-purpe-500'>
+
+           <div className='relative   '>
           {
                tweet?.img &&
-<Image src={tweet?.img} className=" w-full rounded-xl   mb-1"  unoptimized alt="Postimg"  width={300} height={100} style={{ objectFit:'contain'}} />          
+<Image src={tweet?.img} className=" aspect-[16/9] md:aspect-[2/1]  rounded-xl  w-full border-white/10 border-2  "  unoptimized alt="Postimg"  width={200} height={100} style={{ objectFit:'cover'}} />          
 }
 
-          
-         <div  className='  py-2 flex gap-2 text-white/60  ' > 
+<div className="divider my-0"></div> 
+
+         <div  className='  py-2 flex gap-2 items-center text-white/60  ' > 
               <button  className=' flex items-center gap-2'
               onClick = {!hasLiked ? ()=>likeMutation({postid:tweet?.id}):()=>unlikeMutation({postid:tweet?.id})}
               >   
@@ -169,13 +173,16 @@ const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][numb
               </button>
               
             <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/> {tweet?._count?.comments}   </div>
+          
+          
+         <Link href={`/post/${tweet?.id}`}>
+      <p className=' text-sm'>view comments</p>
+         </Link>
+
+        
          </div>
 
-         <CreateComment  postId = {tweet?.id}/>
-
-         <Link href={`/post/${tweet?.id}`}>
-      <p className=' text-sm'>Show comments</p>
-         </Link>
+         <CreateComment  tweet={tweet}/>
 
 
             </div>  

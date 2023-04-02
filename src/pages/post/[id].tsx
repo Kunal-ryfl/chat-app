@@ -19,8 +19,8 @@ const Page = (  ) => {
 
   return (
     <div className='  pb-16 py-2 min-h-screen'   >
-    <div className=' w-full   border-white/10 px-2   py-4'>
-       <h1 className=' text-2xl font-bold'>Comments</h1>
+    <div className=' w-full   px-2   py-4'>
+       <h1 className=' text-xl font-bold'>Comments</h1>
     </div>
        
      
@@ -28,7 +28,7 @@ const Page = (  ) => {
         data && data.length < 1 &&
         <div className='  w-full md:w-[600px]     p-2'>
             <GiAstronautHelmet className=' text-9xl animate-pulse mx-auto  mt-20'/>
-          <h1 className=' text-center text-xl '>silence</h1>
+          <h1 className=' text-center text-xl '>Silence here </h1>
           <p className=' text-center text-white/60 my-5'>No comments</p>
              </div>
       }

@@ -68,9 +68,9 @@ const Create = () => {
 	});  
     
   return (
-    <Headroom   >
+    // <Headroom   >
 
-    <form className='  backdrop-blur-md z-10 flex items-center  w-full md:w-[600px]  mx-auto  px-2  py-4 '
+    <form className='   z-10 flex items-center   w-full md:w-[600px]  mx-auto  px-2  py-4 '
     onSubmit={(e) => {
       e.preventDefault()
       
@@ -90,13 +90,13 @@ const Create = () => {
     >
        
         <Image src={useSessionData?.user.image ||"/img"} unoptimized height={70} width={65} alt="" className=" mr-3 rounded-full " />
-        <input type='text' value={post} placeholder='whats on your mind ...' className='  w-full text-sm md:text-lg font-light bg-transparent outline-none  px-4 py-1   ' 
+        <input type='text' value={post} placeholder='whats on your mind ...' className='   w-full text-sm md:text-lg font-light bg-transparent outline-none  px-4 py-1   ' 
         onChange={(e)=>setPost(e.target.value)}
         />
         <button  className=' rounded-full  font-semibold md:text-xl  text-sm  bg-[hsl(280,100%,70%)]  px-6 py-2 '>Post</button>
         
     </form>
-        </Headroom>
+        // </Headroom>
   )
 }
 

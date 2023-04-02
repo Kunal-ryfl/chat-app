@@ -3,6 +3,7 @@ import Create from './components/Create'
 import Post from './components/Post'
 import { api } from '~/utils/api'
 import { MoonLoader } from 'react-spinners'
+import Headroom from 'react-headroom'
 import { GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "~/server/auth";
 
@@ -14,13 +15,15 @@ const Feed = () => {
   return (
     
    <div className='  pb-16 py-2'   >
-    <div className=' w-full  border-white/10 px-2   py-4'>
-       <h1 className=' text-2xl font-bold'>Home</h1>
+    <Headroom >
+      <div className=' w-full md:w-[600px]  border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
+
+    <div className='   w-full md:w-[600px]  mx-auto border-white/10 px-2   py-4'>
+       <h1 className=' text-xl  font-bold'>Home</h1>
     </div>
-       
-
-
     <Create/>  
+      </div>
+    </Headroom>
     {
       posts?.length  &&
            posts?.map((post)=>(

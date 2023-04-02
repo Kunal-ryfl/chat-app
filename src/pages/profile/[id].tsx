@@ -14,13 +14,12 @@ const Profile = () => {
 
   const { data: useSessionData,} = useSession();
   const { data:user,isLoading:load1 } = api.example.getUser.useQuery({ text: query });
-  const { data, isLoading:load2, error } = api.example.getUserPosts.useQuery({userId:query});
+  const { data, isLoading:load2, error } = api.example.getPosts.useQuery();
 
-  const len: number = data?.length || 0;
+ 
   if (load1 || load2)
     return (
       <>
-        {" "}
         <MoonLoader color="purple" className=" mx-auto my-10" />{" "}
       </>
     );
@@ -55,7 +54,7 @@ const Profile = () => {
             <AiOutlineEdit />
           </label>
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className="modal overflow-hidden bg-slate-900/60 backdrop-blur-md">
+          <div className="modal  bg-slate-900/60 backdrop-blur-md">
             <div className="modal-box relative  rounded-md  bg-black">
               <label
                 htmlFor="my-modal-3"
@@ -74,19 +73,15 @@ const Profile = () => {
       </div>
 
       <div className="  py-4">
-        <h1 className=" px-2  font-bold">Posts ({len})</h1>
+        <h1 className=" p-2  font-bold">Posts</h1>
 
-        {len > 0 ? (
-          <>
+         
             {data?.map((post) => (
-              <PostContainer key={post.id} tweet={post} />
+              post?.userId === query &&
+              <PostContainer key={post?.id} tweet={post} />
             ))}
-          </>
-        ) : (
-          <div>
-            <h1 className="  text-sm text-[hsl(280,100%,70%)]">No posts</h1>
-          </div>
-        )}
+         
+        
       </div>
     </div>
   );

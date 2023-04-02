@@ -34,7 +34,7 @@ type user ={
 const Comment = ( comment:{caption:string,author:user,createdAt:Date}) => {
   return (
         
-<div className=' rounded-sm border-white/10 border-t-2 md:border-x-2 b  w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
+<div className=' rounded-sm border-white/10 border-y-2 md:border-x-2   w-full md:w-[600px]    p-2 grid grid-cols-10 grid-row-10  '>
 
         
 <div className=' p-1   col-span-1 '>
