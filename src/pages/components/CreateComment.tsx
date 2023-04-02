@@ -6,7 +6,7 @@ import { RouterOutputs } from '~/utils/api';
 
 
 const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][number]} ) => {
-  const {id} = tweet
+  
   const [comment,setComment] = useState("");
 
   const trpc = api.useContext();
@@ -62,7 +62,7 @@ const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][numbe
  onSubmit={(e) => {
     e.preventDefault()
     
-    const result = commentInput.safeParse({postId:id,comment:comment})
+    const result = commentInput.safeParse({postId:tweet?.id,comment:comment})
     
     if (!result.success) {
       toast.error(result.error.format()._errors.join('\n'))
@@ -70,7 +70,7 @@ const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][numbe
     }
     
 
-    mutate({postId:id,comment:comment})
+    mutate({postId:tweet?.id,comment:comment})
     
   }}
   className=" my-2 "
