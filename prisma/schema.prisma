@@ -80,6 +80,8 @@ model User {
     accounts      Account[]
     sessions      Session[]
 
+    bio          String?
+    username     String? 
     posts         Post[]
     comments      Comment[]
     likedposts    LikedPost[]

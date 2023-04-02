@@ -109,7 +109,7 @@ export const exampleRouter = createTRPCRouter({
     return ctx.prisma.user.findUnique({
       where: {
 
-        id:input.text
+      id:input.text
       },
     })
 

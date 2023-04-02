@@ -47,6 +47,16 @@ const Profile = () => {
           <h1 className=" text-[11px] text-gray-400 md:text-sm">
             {user?.email}
           </h1>
+             {
+              user?.bio ? 
+          <h1 className=" text-[11px] text-gray-400 md:text-sm">
+            {user?.bio}
+          </h1>:
+          <><h1 className=" text-[11px] text-gray-400 md:text-sm">
+          add bio
+        </h1></>
+             }
+
 
        { useSessionData?.user?.name === user?.name &&
        <>
