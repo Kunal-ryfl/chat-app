@@ -14,7 +14,7 @@ const Feed = () => {
   if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
   return (
     
-   <div className='  pb-16 py-2'   >
+   <div className='  pb-16'   >
     <Headroom >
       <div className=' w-full md:w-[600px]  border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
 
