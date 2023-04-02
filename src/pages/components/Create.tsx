@@ -70,7 +70,7 @@ const Create = () => {
   return (
     // <Headroom   >
 
-    <form className='   z-10 flex items-center   w-full md:w-[600px]  mx-auto  px-2  py-4 '
+    <form className='   z-10 flex items-center   w-full md:w-[600px]  mx-auto  px-2 py-1  md:py-4 '
     onSubmit={(e) => {
       e.preventDefault()
       
@@ -87,6 +87,7 @@ const Create = () => {
       mutate(post)
       
     }}
+
     >
        
         <Image src={useSessionData?.user.image ||"/img"} unoptimized height={70} width={65} alt="" className=" mr-3 rounded-full " />
