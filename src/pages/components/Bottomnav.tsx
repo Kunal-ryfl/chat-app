@@ -44,17 +44,17 @@ const Bottomnav = () => {
 
 
 <div className="btm-nav  bg-slate-900">
-  <button className="  border-slate-400 border-t-2  text-2xl text-white">
+  <button className="  border-slate-400   text-2xl text-white">
 <Link href={"/feed"}>
 <AiOutlineHome className={asPath ==='/feed'?" text-[hsl(280,100%,70%)]":""}  />
   </Link>
   </button>
-  <button className="border-slate-400 border-t-2 text-white text-2xl">
+  <button className="border-slate-400  text-white text-2xl">
     <Link href={"/"}>
 <IoMdNotificationsOutline className={asPath===''?" text-[hsl(280,100%,70%)]":""}/> 
    </Link>
   </button>
-  <button className="border-slate-400 border-t-2 text-white text-2xl">
+  <button className="border-slate-400  text-white text-2xl">
   <Link href={`/profile/${session?.user?.id}`}>
 <CgProfile className={asPath===`/profile/${session?.user?.id}`?" text-[hsl(280,100%,70%)]":""} /> 
   </Link>
