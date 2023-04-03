@@ -2,7 +2,7 @@ import React from 'react'
 import Create from './components/Create'
 import Post from './components/Post'
 import { api } from '~/utils/api'
-import { MoonLoader } from 'react-spinners'
+import { MoonLoader,PacmanLoader } from 'react-spinners'
 import Headroom from 'react-headroom'
 import { GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "~/server/auth";
@@ -11,14 +11,14 @@ import { getServerAuthSession } from "~/server/auth";
 const Feed = () => {
 
   const {data:posts,isLoading,error} = api.example.getPosts.useQuery();
-  if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
+  if(isLoading) return< div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='blue'  /> </div>
   return (
     
-   <div className='  pb-16'   >
+   <div className='   pb-16'   >
     <Headroom >
-      <div className=' w-full md:w-[600px]  border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
+      <div className='  w-full md:w-[600px]  border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
 
-    <div className='   w-full md:w-[600px]  mx-auto border-white/10 px-2   py-4'>
+    <div className='   w-full md:w-[600px]  mx-auto border-white/10 px-2   py-2'>
        <h1 className=' text-base md:text-xl   font-bold'>Home</h1>
     </div>
     <Create/>  

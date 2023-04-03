@@ -2,7 +2,7 @@ import React from "react";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
 import PostContainer from "../components/Post";
-import { MoonLoader } from "react-spinners";
+import { MoonLoader,PacmanLoader } from "react-spinners";
 import { AiOutlineEdit } from "react-icons/ai";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -19,14 +19,12 @@ const Profile = () => {
  
   if (load1 || load2)
     return (
-      <>
-        <MoonLoader color="purple" className=" mx-auto my-10" />{" "}
-      </>
+      < div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='blue'  /> </div>
     );
   return (
-    <div className=" min-h-screen bg-black pb-16   text-white md:px-2">
+    <div className=" min-h-screen  pb-16   text-white md:px-2">
       <div className="  grid   w-full  grid-cols-10 grid-rows-3 rounded-sm md:w-[600px]     ">
-        <div className=" col-span-full  row-span-2  rounded-sm bg-white/10"></div>
+        <div className=" col-span-full  row-span-2  rounded-sm bg-slate-400"></div>
 
         <div className="  col-span-3 row-span-1">
           <Image

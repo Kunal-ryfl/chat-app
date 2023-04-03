@@ -1,6 +1,6 @@
 import React from 'react'
 import { api } from '~/utils/api'
-import { MoonLoader } from 'react-spinners'
+import { MoonLoader,PacmanLoader } from 'react-spinners'
 import { useRouter } from 'next/router'
 import Comment from '../components/Comment'
 import {FcPortraitMode} from 'react-icons/fc'
@@ -15,12 +15,12 @@ const Page = (  ) => {
   const {data,isLoading,error} = api.example.getPostById.useQuery(query);
   
  
-  if(isLoading) return<> <MoonLoader color='purple' className='mx-auto my-10'/> </>
+  if(isLoading) return< div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='blue'  /> </div>
 
   return (
     <div className='  pb-16 py-2 min-h-screen'   >
-    <div className=' w-full   px-2   py-4'>
-       <h1 className=' text-xl font-bold'>Comments</h1>
+    <div className=' w-full   px-2  py-2'>
+       <h1 className=' text-sm md:text-xl font-bold'>Comments</h1>
     </div>
        
      

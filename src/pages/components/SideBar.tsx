@@ -28,9 +28,9 @@ const SideBar = () => {
             
     <div className=' hidden md:sticky top-10 my-4 gap-3   px-2   text-2xl  py-4 h-fit md:grid   grid-cols-3 md:grid-cols-1 rounded-sm  '>
        
-     <div className=" flex items-center justify-start " ><Link href={"/feed"}><h1  className={asPath ==='/feed'?" text-[hsl(280,100%,70%)]":""} ><AiOutlineHome/></h1></Link><h1 className=" mx-2 hidden xl:block text-xl">Home</h1> </div>
-     <div className="  flex  items-centerjustify-start "><Link href={"/"}><h1><IoMdNotificationsOutline/></h1></Link><h1 className=" mx-2 hidden  xl:block text-xl">Notification</h1></div>
-     <div className="  flex items-center justify-start "><Link href={`/profile/${session?.user?.id}`}><h1 className={asPath===`/profile/${session?.user?.id}`?" text-[hsl(280,100%,70%)]":""} ><CgProfile/></h1></Link><h1 className=" mx-2  hidden xl:block text-xl" >Profile</h1></div>
+     <div className=" flex items-center justify-start " ><Link href={"/feed"}><h1  className={asPath ==='/feed'?" text-[hsl(280,100%,70%)]":""} ><AiOutlineHome/></h1></Link><h1 className=" mx-2 hidden xl:block text-base font-semibold">Home</h1> </div>
+     <div className="  flex  items-centerjustify-start "><Link href={"/"}><h1><IoMdNotificationsOutline/></h1></Link><h1 className=" mx-2 hidden  xl:block text-base font-semibold ">Notification</h1></div>
+     <div className="  flex items-center justify-start "><Link href={`/profile/${session?.user?.id}`}><h1 className={asPath===`/profile/${session?.user?.id}`?" text-[hsl(280,100%,70%)]":""} ><CgProfile/></h1></Link><h1 className=" mx-2  hidden xl:block text-base font-semibold" >Profile</h1></div>
 
     </div>
 

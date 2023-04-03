@@ -1,11 +1,11 @@
-import React from 'react'
-import { api, RouterOutputs } from '~/utils/api';
-import Image from 'next/image';
-import {AiFillHeart} from 'react-icons/ai'
-import {BiComment} from 'react-icons/bi'
-import toast from 'react-hot-toast';
-import Link from 'next/link';
-import CreateComment from './CreateComment';
+import React from "react";
+import { api, RouterOutputs } from "~/utils/api";
+import Image from "next/image";
+import { AiFillHeart } from "react-icons/ai";
+import { BiComment } from "react-icons/bi";
+import toast from "react-hot-toast";
+import Link from "next/link";
+import CreateComment from "./CreateComment";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocal from "dayjs/plugin/updateLocale";
@@ -31,167 +31,173 @@ dayjs.updateLocale("en", {
   },
 });
 
-
-const PostContainer = ( {tweet}:{tweet:RouterOutputs['example']['getPosts'][number]}) => {
-
-  const hasLiked = tweet?.likes.length>0;
+const PostContainer = ({
+  tweet,
+}: {
+  tweet: RouterOutputs["example"]["getPosts"][number];
+}) => {
+  const hasLiked = tweet?.likes.length > 0;
   const trpc = api.useContext();
-  
-  const {mutate:likeMutation} = api.example.likePost.useMutation({
-    onMutate:async ()=>{
+
+  const { mutate: likeMutation } = api.example.likePost.useMutation({
+    onMutate: async () => {
       // console.log("like fired")
-   await  trpc.example.getPosts.cancel() 
-      
+      await trpc.example.getPosts.cancel();
 
-      const prevPosts = trpc.example.getPosts.getData()
-
-      //optimistic update
-
-      trpc.example.getPosts.setData(undefined,(x)=>{
-           if(!x) return prevPosts
-
-           return x.map(post=>{
-            if(post.id===tweet?.id){
-              return ({
-                ...post,
-                likes:[{userId:tweet?.userId}],
-                _count:{
-                  likes:tweet._count?.likes+1,
-                  comments:tweet._count?.comments,
-                }  
-
-              })
-            }
-            return post
-
-           })
-      })
-
-
-      return {prevPosts}
-    },
-
-   
-    onError: (err,id,context) => {
-			toast.error(`An error occured when liking post`)
-			if (!context) return
-			trpc.example.getPosts.setData(undefined, () => context.prevPosts)
-		},
-
-    onSettled: async () => {
-			await trpc.example.getPosts.invalidate()
-		},
-
-  });
-
-  const {mutate:unlikeMutation} = api.example.unlikePost.useMutation({
-    onMutate:async ()=>{
-      // console.log("unlike fired")
-      await trpc.example.getPosts.cancel() 
-      
-
-      const prevPosts = trpc.example.getPosts.getData()
+      const prevPosts = trpc.example.getPosts.getData();
 
       //optimistic update
 
-      trpc.example.getPosts.setData(undefined,(x)=>{
-           if(!x) return prevPosts
+      trpc.example.getPosts.setData(undefined, (x) => {
+        if (!x) return prevPosts;
 
-           return x.map(post=>{
-            if(post.id===tweet?.id){
-              return ({
-                ...post,
-                likes:[],
-                _count:{
-                  likes:tweet._count.likes-1,
-                  comments:tweet._count?.comments,
-                }  
+        return x.map((post) => {
+          if (post.id === tweet?.id) {
+            return {
+              ...post,
+              likes: [{ userId: tweet?.userId }],
+              _count: {
+                likes: tweet._count?.likes + 1,
+                comments: tweet._count?.comments,
+              },
+            };
+          }
+          return post;
+        });
+      });
 
-              })
-            }
-            return post
-
-           })
-      })
-
-
-      return {prevPosts}
+      return { prevPosts };
     },
 
-   
     onError: (err, id, context) => {
-			toast.error(`An error occured when unliking post`)
-			if (!context) return
-			trpc.example.getPosts.setData(undefined, () => context.prevPosts)
-		},
+      toast.error(`An error occured when liking post`);
+      if (!context) return;
+      trpc.example.getPosts.setData(undefined, () => context.prevPosts);
+    },
 
     onSettled: async () => {
-			await trpc.example.getPosts.invalidate()
-		},
-
+      await trpc.example.getPosts.invalidate();
+    },
   });
 
-  
+  const { mutate: unlikeMutation } = api.example.unlikePost.useMutation({
+    onMutate: async () => {
+      // console.log("unlike fired")
+      await trpc.example.getPosts.cancel();
+
+      const prevPosts = trpc.example.getPosts.getData();
+
+      //optimistic update
+
+      trpc.example.getPosts.setData(undefined, (x) => {
+        if (!x) return prevPosts;
+
+        return x.map((post) => {
+          if (post.id === tweet?.id) {
+            return {
+              ...post,
+              likes: [],
+              _count: {
+                likes: tweet._count.likes - 1,
+                comments: tweet._count?.comments,
+              },
+            };
+          }
+          return post;
+        });
+      });
+
+      return { prevPosts };
+    },
+
+    onError: (err, id, context) => {
+      toast.error(`An error occured when unliking post`);
+      if (!context) return;
+      trpc.example.getPosts.setData(undefined, () => context.prevPosts);
+    },
+
+    onSettled: async () => {
+      await trpc.example.getPosts.invalidate();
+    },
+  });
+
   return (
-        
-        <div className=' rounded-sm border-white/10 border-y-2 md:border-x-2 b  w-full md:w-[600px]     p-2 grid grid-cols-10 grid-row-10  '>
+    <div className="  b grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2     border-white/10 p-2 md:w-[600px] md:border-x-2  ">
+      <div className="  col-span-2  p-2  sm:col-span-1    ">
+        <Link href={`/profile/${tweet?.user?.id}`}>
+          <Image
+            src={tweet?.user?.image || "/img"}
+            height={70}
+            width={40}
+            unoptimized
+            alt=""
+            className=" mr-3 w-fit  rounded-md border-2 border-white/10 "
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAPoCAYAAAAoeFtqAAAFY0lEQVR42u3RMQ0AAAjAMPD/cGEXbEDSSVizqyZ0pgQCRECACAgQAQEiIECAABEQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAQECBIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACAgQIEAEBIiAABEQIAICxAYgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQIAAERAgAgJEQIAICBAgQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQIAAASIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAgIECBABASIgQAQEiIAAsQGIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAgIECBABASIgAARECACAgQIEAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAARECBAgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAABAkRAgAgIEAEBIiBAbAAiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAICBAgQAQEiIEAEBIiAAAECRECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAEBAgQIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIECAABEQIAICRECACAgQG4AICBABASIgQAQEiIAICBABASIgQAQEiIAICBABASIgQAQEiIAICBABASIgQAQEiIAICBAB+dkCxfeXh1cuO7YAAAAASUVORK5CYII="
+          />
+        </Link>
+      </div>
 
-        
-         <div className=' p-1   col-span-1 '>
-          <Link href={`/profile/${tweet?.user?.id}`}>
-           <Image src={tweet?.user?.image||"/img"} height={70} width={40} unoptimized alt="" className=" mr-3  rounded-md border-white/10 border-2 " />
-          </Link>
-         </div>
+      <div className=" grid-rows-10 col-span-8  grid  sm:col-span-9">
+        <div className=" p-1 ">
+          <div className=" flex items-baseline gap-2">
+            <p className=" text-base  font-semibold "> {tweet?.user?.name}</p>
+            <p className=" text-xs font-extralight  text-slate-400">
+              {" "}
+              {dayjs(tweet?.createdAt).fromNow()}{" "}
+            </p>
+          </div>
 
-         <div className=' grid grid-rows-10   col-span-9'>
-        <div className=' p-1 '>
-
-            <div className=' flex items-baseline gap-2'>
-
-        <p className=' text-base  font-semibold '> {tweet?.user?.name }</p>
-        <p className=' text-sm font-extralight  '>  {dayjs(tweet?.createdAt).fromNow()} </p>
-            </div>
-      
-             <p className=' text-base md:text-md  text-white/95 '>{tweet?.caption}</p>
+          <p className=" md:text-md text-sm  text-white/95 ">
+            {tweet?.caption}
+          </p>
         </div>
 
+        <div className="relative   ">
+          {tweet?.img && (
+            <Image
+              src={tweet?.img}
+              className=" aspect-[16/9] w-full  rounded-xl  border-2 border-white/10 md:aspect-[2/1]  "
+              unoptimized
+              alt="Postimg"
+              width={200}
+              height={100}
+              style={{ objectFit: "cover" }}
+            />
+          )}
 
-           <div className='relative   '>
-          {
-               tweet?.img &&
-<Image src={tweet?.img} className=" aspect-[16/9] md:aspect-[2/1]  rounded-xl  w-full border-white/10 border-2  "  unoptimized alt="Postimg"  width={200} height={100} style={{ objectFit:'cover'}} />          
-}
+          <div className="divider my-0"></div>
 
-<div className="divider my-0"></div> 
+          <div className="   flex items-center gap-2 py-2 text-slate-400  ">
+            <button
+              className=" flex items-center gap-2"
+              onClick={
+                !hasLiked
+                  ? () => likeMutation({ postid: tweet?.id })
+                  : () => unlikeMutation({ postid: tweet?.id })
+              }
+            >
+              <AiFillHeart
+                className={!hasLiked ? " text-xl" : " fill-pink-500 text-xl"}
+              />
+              {tweet?._count?.likes}
+            </button>
 
-         <div  className='  py-2 flex gap-2 items-center text-white/60  ' > 
-              <button  className=' flex items-center gap-2'
-              onClick = {!hasLiked ? ()=>likeMutation({postid:tweet?.id}):()=>unlikeMutation({postid:tweet?.id})}
-              >   
+            <div className=" flex items-center gap-2">
+              {" "}
+              <BiComment className=" fill-sky-500 text-xl" /> {tweet?._count?.comments}{" "}
+            </div>
 
-             <AiFillHeart className={!hasLiked? " text-xl":" fill-red-600 text-xl"} />{tweet?._count?.likes} 
-              </button>
-              
-            <div className=' flex items-center gap-2'> <BiComment className=' text-xl'/> {tweet?._count?.comments}   </div>
-          
-          
-         <Link href={`/post/${tweet?.id}`}>
-      <p className=' text-sm'>view comments</p>
-         </Link>
+            <Link href={`/post/${tweet?.id}`}>
+              <p className=" text-sm">view comments</p>
+            </Link>
+          </div>
 
-        
-         </div>
+          <CreateComment tweet={tweet} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-         <CreateComment  tweet={tweet}/>
-
-
-            </div>  
-
-         </div>
-
-         </div>
-
-  )
-}
-
-export default PostContainer
+export default PostContainer;
