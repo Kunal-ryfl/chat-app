@@ -19,7 +19,7 @@ const Profile = () => {
  
   if (load1 || load2)
     return (
-      < div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='blue'  /> </div>
+      < div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='purple'  /> </div>
     );
   return (
     <div className=" min-h-screen  pb-16   text-white md:px-2">

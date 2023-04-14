@@ -115,12 +115,19 @@ export const exampleRouter = createTRPCRouter({
 
   }),
 
+
+  getAllUser:protectedProcedure.query(async({ctx})=>{
+    return ctx.prisma.user.findMany();
+  }),
+
+
   create : protectedProcedure.input(postInput).mutation(async({ctx,input})=>{
 
     return ctx.prisma.post.create({
       data: {
-        caption: input,
-        
+        caption: input.data,
+        img:input.img,
+  
         user: {
           connect: {
             id: ctx.session.user.id,
@@ -152,7 +159,7 @@ export const exampleRouter = createTRPCRouter({
   
   }),
 
-
+  
 
   getPostById:protectedProcedure.input(z.string()).query(async({ctx,input})=>{
  

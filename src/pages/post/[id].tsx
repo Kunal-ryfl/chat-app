@@ -15,7 +15,7 @@ const Page = (  ) => {
   const {data,isLoading,error} = api.example.getPostById.useQuery(query);
   
  
-  if(isLoading) return< div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='blue'  /> </div>
+  if(isLoading) return< div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='purple'  /> </div>
 
   return (
     <div className='  pb-16 py-2 min-h-screen'   >
