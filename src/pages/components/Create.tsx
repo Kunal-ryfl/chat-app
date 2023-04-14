@@ -30,6 +30,7 @@ const handleFileSelected = async (e:ChangeEvent<HTMLInputElement>) => {
  console.log("File = ",file)
 
      e.preventDefault();
+// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       const filename = `${uuidv4()}-${file?.name}`;
 
     const { data, error } = await supabase.storage
