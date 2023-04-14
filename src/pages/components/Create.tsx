@@ -10,9 +10,8 @@ import { createClient } from '@supabase/supabase-js';
 import {FiImage} from 'react-icons/fi'
 
 const supabase = createClient(
-  "https://kdrzjjunjsbfuglvmnmk.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkcnpqanVuanNiZnVnbHZtbm1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzkxNDM2NjYsImV4cCI6MTk5NDcxOTY2Nn0.V7CrA6GGXxcHRSck4O2wmGtYdpsiJiA682a0vsx97To",
-);
+  process.env.NEXT_PUBLIC_SUPABASE_URL || " ",
+process.env.SUPABASE_SERVICE_ROLE_KEY ||" ");
 
 const Create = () => {
 
