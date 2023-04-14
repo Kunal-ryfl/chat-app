@@ -19,7 +19,7 @@ const User = () => {
       <h1 className="  text-xl font-semibold"> Users </h1>
 
       {data?.map((x) => (
-        <div className=" my-3  grid  grid-cols-10   ">
+        <div className=" my-3  grid  grid-cols-10   " key={x.id}>
           <div className=" col-span-2">
             <Image
               src={x?.image || "/fsd"}

@@ -41,7 +41,7 @@ const handleFileSelected = async (e:ChangeEvent<HTMLInputElement>) => {
 
     const filepath = data?.path;
 // console.log(filepath)
-setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filepath}` || 'null');
+setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filepath}`);
 
    };
 
@@ -133,7 +133,7 @@ setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/p
 
 <label htmlFor='img' >
 <FiImage className=' cursor-pointer text-xl  mr-1' />
-<input type="file" id='img'  onChange={handleFileSelected}  className=" hidden file-input file-input-bordered file-input-primary w-full max-w-xs" />
+<input type="file" id='img'  onChange={(e)=> void handleFileSelected(e)}  className=" hidden file-input file-input-bordered file-input-primary w-full max-w-xs" />
 </label>
       
         <button  className=' rounded-full  font-semibold md:text-base  text-sm   bg-sky-500  px-6 py-2 '>Post</button>
