@@ -2,6 +2,7 @@ import React from 'react'
 import Create from './components/Create'
 import Post from './components/Post'
 import { api } from '~/utils/api'
+import Skeleton from './components/Skeleton'
 import { MoonLoader,PacmanLoader } from 'react-spinners'
 import Headroom from 'react-headroom'
 import { GetServerSidePropsContext } from "next";
@@ -11,10 +12,22 @@ import { getServerAuthSession } from "~/server/auth";
 const Feed = () => {
 
   const {data:posts,isLoading,error} = api.example.getPosts.useQuery();
-  if(isLoading) return< div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='purple'  /> </div>
+  if(isLoading) return< div className=' h-screen w-screen  overflow-hidden'>
+     {/* <PacmanLoader color='purple'  />  */}
+     
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     <Skeleton/>
+     </div>
   return (
     
-   <div className='   pb-16'   >
+   <div className='  pb-16'   >
     {/* <Headroom > */}
       <div className='  w-full md:w-[600px]  border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
 

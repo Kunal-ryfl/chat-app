@@ -126,7 +126,8 @@ setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/p
     >
        
 
-        <Image src={useSessionData?.user.image ||"/img"} unoptimized height={70} width={65} alt="" className=" mr-3 rounded-full " />
+        <Image src={useSessionData?.user.image ||"/img"} 
+        height={70} width={65} alt="" className=" mr-3 rounded-full " />
         
         <input type='text' value={post} placeholder='whats on your mind ...' className='   w-full text-slate-400 text-sm md:text-base font-light bg-transparent outline-none  px-4 py-1   ' 
         onChange={(e)=>setPost(e.target.value)}

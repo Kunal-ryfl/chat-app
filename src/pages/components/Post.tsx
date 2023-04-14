@@ -38,7 +38,6 @@ const PostContainer = ({
 }) => {
 
 
-  
 
   const hasLiked = tweet?.likes.length > 0;
   // console.log(hasLiked)
