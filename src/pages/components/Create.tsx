@@ -42,6 +42,7 @@ const handleFileSelected = async (e:ChangeEvent<HTMLInputElement>) => {
 
     const filepath = data?.path;
 // console.log(filepath)
+// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filepath}`);
 
    };
