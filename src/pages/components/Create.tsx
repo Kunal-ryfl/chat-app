@@ -8,12 +8,14 @@ import Headroom from 'react-headroom'
 import { v4 as uuidv4 } from 'uuid';
 import { createClient } from '@supabase/supabase-js';
 import {FiImage} from 'react-icons/fi'
+import { MoonLoader } from 'react-spinners';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || " ",
 process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||" ");
 
 const Create = () => {
+  const[uploading,setUploading] = useState(false)
 
  const[post,setPost] = useState("");  
  let fileSelected:File | undefined ;
@@ -22,31 +24,49 @@ const Create = () => {
 
  const [filePath, setfilePath] = useState("") 
 
-
  const handleFileSelected = async (e:ChangeEvent<HTMLInputElement>) => {
-   e.preventDefault();
+  
+  e.preventDefault();
+
+  setUploading(true)
+
   const file = e.target.files?.[0]
   // console.log(file)
   fileSelected = file ;
-   
-  console.log(fileSelected)
+
+  
+  const loadingToast = toast.loading('uploading ...');
+
+  
+  // console.log(fileSelected)
   
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const filename = `${uuidv4()}-${fileSelected?.name}`;
-  console.log(filename)
+  setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filename}`);
+  // console.log("fname ",filename)
   const { data, error } = await supabase.storage
   .from("posts")
   .upload(filename, fileSelected as File , {
     cacheControl: "3600",
     upsert: false,
     
-   });
- 
-   const filepath = data?.path;
-   console.log(filepath)
+  });
+
+  setUploading(false)
+  
+   if(error){
+     toast.error("error uploading",{id:loadingToast});
+     setfilePath("")
+     return
+  }
+  
+  toast.success("uploaded",{id:loadingToast});
+
+  //  const filepath = data?.path;
+  //  console.log("fpath ",filepath)
+
 
    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-   setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filepath}`);
 
 };
 
@@ -105,7 +125,8 @@ const Create = () => {
 			await trpc.example.getPosts.invalidate()
             
 		},
-	});  
+	}); 
+
     
   return (
     // <Headroom   >
@@ -127,21 +148,23 @@ const Create = () => {
     }}
 
     >
-       
 
         <Image src={useSessionData?.user.image ||"/img"} 
         height={70} width={65} alt="" className=" mr-3 rounded-full " />
         
+ 
         <input type='text' value={post} placeholder='whats on your mind ...' className='   w-full text-slate-400 text-sm md:text-base font-light bg-transparent outline-none  px-4 py-1   ' 
         onChange={(e)=>setPost(e.target.value)}
         />
 
+       
+{useSessionData &&
 <label htmlFor='img' >
 <FiImage className=' cursor-pointer text-xl  mr-1' />
 <input type="file" id='img'  onChange={(e)=> void handleFileSelected(e)}  className=" hidden file-input file-input-bordered file-input-primary w-full max-w-xs" />
 </label>
-      
-        <button  className=' rounded-full  font-semibold md:text-[13px]  text-sm   bg-sky-500  px-6 py-2 '>Post</button>
+}
+     <button  className='  rounded-full  font-semibold md:text-[13px]  text-sm   bg-sky-500  px-6 py-2 '>Post</button>
 
         
     </form>
