@@ -43,7 +43,7 @@ const Bottomnav = () => {
 </div>
 
 
-<div className="btm-nav  bg-slate-900">
+<div className="btm-nav  bg-black">
   <button className="  border-slate-400   text-2xl text-white">
 <Link href={"/feed"}>
 <AiOutlineHome className={asPath ==='/feed'?" text-[hsl(280,100%,70%)]":""}  />

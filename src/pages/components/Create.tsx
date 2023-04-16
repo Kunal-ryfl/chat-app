@@ -15,36 +15,41 @@ process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||" ");
 
 const Create = () => {
 
-
  const[post,setPost] = useState("");  
+ let fileSelected:File | undefined ;
+
  const trpc = api.useContext();
 
  const [filePath, setfilePath] = useState("") 
 
-const handleFileSelected = async (e:ChangeEvent<HTMLInputElement>) => {
+
+ const handleFileSelected = async (e:ChangeEvent<HTMLInputElement>) => {
+   e.preventDefault();
+  const file = e.target.files?.[0]
+  // console.log(file)
+  fileSelected = file ;
+   
+  console.log(fileSelected)
   
-  let file ;
-  
-   if(e.target.files){ file = (e.target.files[0]) ;}
- console.log("File = ",file)
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const filename = `${uuidv4()}-${fileSelected?.name}`;
+  console.log(filename)
+  const { data, error } = await supabase.storage
+  .from("posts")
+  .upload(filename, fileSelected as File , {
+    cacheControl: "3600",
+    upsert: false,
+    
+   });
+ 
+   const filepath = data?.path;
+   console.log(filepath)
 
-     e.preventDefault();
-// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      const filename = `${uuidv4()}-${file?.name}`;
+   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+   setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filepath}`);
 
-    const { data, error } = await supabase.storage
-      .from("posts")
-      .upload(filename, file as File , {
-        cacheControl: "3600",
-        upsert: false,
-      });
+};
 
-    const filepath = data?.path;
-// console.log(filepath)
-// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/posts/${filepath}`);
-
-   };
 
 
    const {data:useSessionData} = useSession();
@@ -110,14 +115,12 @@ setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/p
       e.preventDefault()
       
       
-      
       const result = postInput.safeParse({data:post,img:filePath})
       
       if (!result.success) {
         toast.error(result.error.format()._errors.join('\n'))
         return
       }
-      
       
       mutate({data:post,img:filePath})
      
@@ -138,7 +141,7 @@ setfilePath(`https://kdrzjjunjsbfuglvmnmk.supabase.co/storage/v1/object/public/p
 <input type="file" id='img'  onChange={(e)=> void handleFileSelected(e)}  className=" hidden file-input file-input-bordered file-input-primary w-full max-w-xs" />
 </label>
       
-        <button  className=' rounded-full  font-semibold md:text-base  text-sm   bg-sky-500  px-6 py-2 '>Post</button>
+        <button  className=' rounded-full  font-semibold md:text-[13px]  text-sm   bg-sky-500  px-6 py-2 '>Post</button>
 
         
     </form>

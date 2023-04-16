@@ -15,7 +15,7 @@ const User = () => {
 
   return (
     <>
-    <div className=" hidden  sticky top-4 lg:block mt-10 w-52 rounded-xl bg-slate-800 p-2 text-slate-300">
+    <div className=" hidden  sticky top-4 lg:block mt-10 w-52 rounded-sm  bg-white/5 p-2 text-slate-300">
       <h1 className="  text-xl font-semibold"> Users </h1>
 
       {data?.map((x) => (
@@ -36,7 +36,7 @@ const User = () => {
       ))}
     </div>
 
-    <div className=" hidden lg:block mt-4 sticky  top-72 bg-slate-800 p-2 text-slate-300 rounded-xl w-52">
+    <div className=" hidden lg:block mt-4 sticky  top-72  p-2 text-slate-300 rounded-xl w-52">
       <p className="text-xs">Developed by Kunal Bhardwaj © 2023</p>
     </div>
     </>

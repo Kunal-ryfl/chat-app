@@ -20,7 +20,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <div className={inter.className}>
-        <div className=" grid  min-h-screen grid-cols-1 bg-slate-900  md:grid-cols-10">
+        <div className=" grid  min-h-screen grid-cols-1 bg-black  md:grid-cols-10">
           <SideBar />
 
           <div className="   col-span-6   text-white  md:flex md:justify-center   ">

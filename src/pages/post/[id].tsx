@@ -18,7 +18,7 @@ const Page = (  ) => {
   if(isLoading) return< div className=' h-screen w-screen flex justify-center items-center'> <PacmanLoader color='purple'  /> </div>
 
   return (
-    <div className='  pb-16 py-2 min-h-screen'   >
+    <div className='  pb-16 py-2 min-h-screen '   >
     <div className=' w-full   px-2  py-2'>
        <h1 className=' text-sm md:text-xl font-bold'>Comments</h1>
     </div>

@@ -124,9 +124,9 @@ const PostContainer = ({
       await trpc.example.getPosts.invalidate();
     },
   });
-
+  
   return (
-    <div className="  b grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2     border-white/10 p-2 md:w-[600px] md:border-x-2  ">
+    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2     border-white/10 p-2 md:w-[600px] md:border-x-2  ">
       <div className="  col-span-2  p-2  sm:col-span-1    ">
         <Link href={`/profile/${tweet?.user?.id}`}>{
         tweet?.user?.image &&
@@ -162,7 +162,7 @@ const PostContainer = ({
           {tweet?.img && (
             <Image
               src={tweet?.img}
-              className=" aspect-[16/9] w-full  rounded-xl  border-2 border-white/10 md:aspect-[2/1]  "
+              className=" aspect-[16/9] w-full   border-2 border-white/10 md:aspect-[2/1]  "
               unoptimized
               alt="Postimg"
               width={200}
