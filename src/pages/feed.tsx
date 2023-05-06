@@ -7,9 +7,11 @@ import { MoonLoader,PacmanLoader } from 'react-spinners'
 import Headroom from 'react-headroom'
 import { GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "~/server/auth";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 
 const Feed = () => {
+  const [listRef] = useAutoAnimate<HTMLDivElement>();
 
   const {data:posts,isLoading,error} = api.example.getPosts.useQuery();
   if(isLoading) return< div className=' h-screen w-screen  overflow-hidden'>
@@ -37,13 +39,15 @@ const Feed = () => {
     <Create/>  
       </div>
     {/* </Headroom> */}
+    <div ref={listRef} >
     {
       posts?.length  &&
-           posts?.map((post)=>(
+      posts?.map((post)=>(
         
         <Post   tweet={post} key={post.id} />
-      ))
-    }
+        ))
+      }
+      </div>
 
    </div>
    
