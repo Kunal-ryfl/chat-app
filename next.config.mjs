@@ -7,6 +7,9 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  experimental:{
+    scrollRestoration:true
+  },
   images: {
     remotePatterns: [
       {
