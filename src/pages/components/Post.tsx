@@ -2,7 +2,8 @@ import React from "react";
 import { api, RouterOutputs } from "~/utils/api";
 import Image from "next/image";
 import { AiFillHeart } from "react-icons/ai";
-import { BiComment } from "react-icons/bi";
+import {FiMessageCircle} from "react-icons/fi";
+import {MdAdsClick} from 'react-icons/md'
 import toast from "react-hot-toast";
 import Link from "next/link";
 import CreateComment from "./CreateComment";
@@ -12,7 +13,6 @@ import updateLocal from "dayjs/plugin/updateLocale";
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocal);
-
 dayjs.updateLocale("en", {
   relativeTime: {
     future: "in %s",
@@ -126,17 +126,17 @@ const PostContainer = ({
   });
   
   return (
-    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2     border-white/10 p-2 md:w-[600px] md:border-x-2  ">
+    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2  max-w-xl    border-white/10 p-2  md:border-x-2  ">
       <div className="  col-span-2  p-2  sm:col-span-1    ">
         <Link href={`/profile/${tweet?.user?.id}`}>{
         tweet?.user?.image &&
           < Image
             src={tweet?.user?.image || "/img"}
-            height={70}
-            width={40}
+            height={10}
+            width={10}
             unoptimized
             alt=""
-            className=" mr-3 w-fit  rounded-md border-2 border-white/10 "
+            className=" mr-3 w-fit  max-h-12  rounded-full border-2 border-white/10 "
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAPoCAYAAAAoeFtqAAAFY0lEQVR42u3RMQ0AAAjAMPD/cGEXbEDSSVizqyZ0pgQCRECACAgQAQEiIECAABEQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAQECBIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACAgQIEAEBIiAABEQIAICxAYgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQIAAERAgAgJEQIAICBAgQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQIAAASIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAgIECBABASIgQAQEiIAAsQGIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAgIECBABASIgAARECACAgQIEAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAARECBAgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAABAkRAgAgIEAEBIiBAbAAiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAICBAgQAQEiIEAEBIiAAAECRECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAEBAgQIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIECAABEQIAICRECACAgQG4AICBABASIgQAQEiIAICBABASIgQAQEiIAICBABASIgQAQEiIAICBABASIgQAQEiIAICBAB+dkCxfeXh1cuO7YAAAAASUVORK5CYII="
           />}
@@ -145,7 +145,7 @@ const PostContainer = ({
 
       <div className=" grid-rows-10 col-span-8  grid  sm:col-span-9">
         <div className=" p-1 ">
-          <div className=" flex items-baseline gap-2">
+          <div className=" flex items-baseline  gap-2">
             <p className=" text-base  font-semibold "> {tweet?.user?.name}</p>
             <p className=" text-xs font-extralight  text-slate-400">
               {" "}
@@ -153,7 +153,7 @@ const PostContainer = ({
             </p>
           </div>
 
-          <p className=" md:text-md text-sm  text-white/95 ">
+          <p className=" md:text-md text-sm my-1   text-white/95 ">
             {tweet?.caption}
           </p>
         </div>
@@ -162,7 +162,7 @@ const PostContainer = ({
           {tweet?.img && (
             <Image
               src={tweet?.img}
-              className=" aspect-[16/9] w-full   border-2 border-white/10 md:aspect-[2/1]  "
+              className=" aspect-[16/9] w-full rounded-xl  border-2 border-white/10 md:aspect-[2/1]  "
               unoptimized
               alt="Postimg"
               width={200}
@@ -170,15 +170,16 @@ const PostContainer = ({
               style={{ objectFit: "cover" }}
               placeholder="blur"
               blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAPoCAYAAAAoeFtqAAAFY0lEQVR42u3RMQ0AAAjAMPD/cGEXbEDSSVizqyZ0pgQCRECACAgQAQEiIECAABEQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAREQIAICRECACAgQAQECBIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACIiAABEQIAICRECACAgQIEAEBIiAABEQIAICxAYgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQIAAERAgAgJEQIAICBAgQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQAQEiIAAERAgAgJEQIAAASIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAiIgQAQEiIAAERAgAgIECBABASIgQAQEiIAAsQGIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAiIgAARECACAkRAgAgIECBABASIgAARECACAgQIEAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAAREAEBIiBABASIgAARECBAgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAABAkRAgAgIEAEBIiBAbAAiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAIiIEAEBIiAABEQIAICBAgQAQEiIEAEBIiAAAECRECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAERECACAgQAQEiIEAEBAgQIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIAICRECACAgQAQEiIECAABEQIAICRECACAgQG4AICBABASIgQAQEiIAICBABASIgQAQEiIAICBABASIgQAQEiIAICBABASIgQAQEiIAICBAB+dkCxfeXh1cuO7YAAAAASUVORK5CYII='        
-
+                  
             />
           )}
 
-          <div className="divider my-0"></div>
+          {/* <div className="divider my-0"></div> */}
 
-          <div className="   flex items-center gap-2 py-2 text-slate-400  ">
+          <div  className="   flex items-center gap-4 py-2 text-slate-400  ">
             <button
-              className=" flex items-center gap-2"
+            
+              className=" flex items-center gap-1"
               onClick={
                 !hasLiked
                   ? () => likeMutation({ postid: tweet?.id })
@@ -186,18 +187,18 @@ const PostContainer = ({
               }
             >
               <AiFillHeart
-                className={!hasLiked ? " text-xl" : " fill-pink-500 text-xl"}
+                className={!hasLiked ? " text-2xl" : " fill-pink-500 text-2xl"}
               />
               {tweet?._count?.likes}
             </button>
 
-            <div className=" flex items-center gap-2">
+            <div className=" flex items-center gap-1">
               {" "}
-              <BiComment className=" fill-sky-500 text-xl" /> {tweet?._count?.comments}{" "}
+              <FiMessageCircle className="  text-2xl" /> {tweet?._count?.comments}{" "}
             </div>
 
             <Link href={`/post/${tweet?.id}`}>
-              <p className=" text-sm">view comments</p>
+              <MdAdsClick className=" text-2xl"/> 
             </Link>
           </div>
 

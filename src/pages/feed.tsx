@@ -31,9 +31,9 @@ const Feed = () => {
     
    <div className='  pb-16'   >
     {/* <Headroom > */}
-      <div className='  w-full md:w-[600px]  border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
+      <div className='  w-full  max-w-xl border-y-2  md:border-x-2  border-white/10 mx-auto backdrop-blur-md'>
 
-    <div className='   w-full md:w-[600px]  mx-auto border-white/10 px-2   py-2'>
+    <div className='   w-full  max-w-xl  mx-auto border-white/10 px-2   py-2'>
        <h1 className=' text-base md:text-xl   font-bold'>Home</h1>
     </div>
     <Create/>  

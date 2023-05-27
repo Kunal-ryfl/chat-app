@@ -132,7 +132,7 @@ const Create = () => {
   return (
     // <Headroom   >
 
-    <form className='  z-10 flex items-center   w-full md:w-[600px]  mx-auto  px-2 py-1  md:py-4 '
+    <form className='  z-10 flex items-center   w-full  max-w-xl  mx-auto  px-2 py-1  md:py-4 '
     onSubmit={(e) => {
       e.preventDefault()
       

@@ -15,7 +15,7 @@ const User = () => {
 
   return (
     <div className=" sticky top-4 hidden mt-10    lg:block">
-    <div className="  w-52 rounded-sm  bg-white/5 p-2 text-slate-300">
+    <div className="  w-full max-w-xs  rounded-xl  bg-white/5 p-3 text-slate-300">
       <h1 className="  text-xl font-semibold"> Users </h1>
 
       {data?.map((x) => (
