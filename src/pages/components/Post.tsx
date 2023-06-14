@@ -126,7 +126,7 @@ const PostContainer = ({
   });
   
   return (
-    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2  max-w-xl    border-white/10 p-2  md:border-x-2  ">
+    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2  max-w-2xl    border-white/10 p-2  md:border-x-2  ">
       <div className="  col-span-2  p-2  sm:col-span-1    ">
         <Link href={`/profile/${tweet?.user?.id}`}>{
         tweet?.user?.image &&
@@ -192,14 +192,14 @@ const PostContainer = ({
               {tweet?._count?.likes}
             </button>
 
+            <Link href={`/post/${tweet?.id}`}>
             <div className=" flex items-center gap-1">
-              {" "}
+          
               <FiMessageCircle className="  text-2xl" /> {tweet?._count?.comments}{" "}
             </div>
-
-            <Link href={`/post/${tweet?.id}`}>
-              <MdAdsClick className=" text-2xl"/> 
             </Link>
+
+           
           </div>
 
           <CreateComment tweet={tweet} />

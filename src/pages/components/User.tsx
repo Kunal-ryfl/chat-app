@@ -15,7 +15,7 @@ const User = () => {
 
   return (
     <div className=" sticky top-4 hidden mt-10    lg:block">
-    <div className="  w-full max-w-xs  rounded-xl  bg-white/5 p-3 text-slate-300">
+    <div className="  w-full max-w-[230px]  rounded-xl  bg-white/5 p-3 text-slate-300">
       <h1 className="  text-xl font-semibold"> Users </h1>
 
       {data?.map((x) => (
@@ -29,7 +29,7 @@ const User = () => {
               className="w-14 rounded-full"
             />
           </div>
-          <div className=" col-span-8 p-2">
+          <div className="  flex items-center  col-span-8 px-3 ">
             <h1 className=" text-sm">{x?.name}</h1>
           </div>
         </div>

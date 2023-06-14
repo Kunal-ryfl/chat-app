@@ -4,7 +4,6 @@ import { commentInput } from '~/types';
 import toast from 'react-hot-toast'
 import { RouterOutputs } from '~/utils/api';
 
-
 const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][number]} ) => {
   
   const [comment,setComment] = useState("");

@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 const Profile = () => {
   const router = useRouter();
   const query = router.query.id as string;
-  console.log("Q = ", query);
+  // console.log("Q = ", query);
 
   const { data: useSessionData,} = useSession();
   const { data:user,isLoading:load1 } = api.example.getUser.useQuery({ text: query });

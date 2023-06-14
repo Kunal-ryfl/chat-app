@@ -23,12 +23,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <div className=" grid md:p-3  min-h-screen grid-cols-1 bg-black  md:grid-cols-10">
           <SideBar />
 
-          <div className=" bg-neutral-900/70   rounded-l-xl md:p-2    col-span-5   text-white  md:flex md:justify-center   ">
+          <div className=" bg-neutral-900/70   rounded-l-xl md:p-2     col-span-5   text-white  md:flex md:justify-center   ">
             <Component {...pageProps} />
             <Toaster />
           </div>
           <div className="  bg-neutral-900/70 pr-2   rounded-r-xl col-span-3">
-            <User/>
+            {/* <User/> */}
           </div>
           <Bottomnav />
         </div>
