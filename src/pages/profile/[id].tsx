@@ -23,7 +23,7 @@ const Profile = () => {
     );
   return (
     <div className=" min-h-screen  pb-16   text-white md:px-2">
-      <div className="  grid   w-full  grid-cols-10 grid-rows-3 rounded-sm md:w-[600px]     ">
+      <div className="  grid   w-full  grid-cols-10 grid-rows-3 rounded-sm md:w-3xl     ">
         <div className=" col-span-full  row-span-2  rounded-sm bg-slate-400"></div>
 
         <div className="  col-span-3 row-span-1">
