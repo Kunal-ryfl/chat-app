@@ -20,14 +20,18 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <div className={inter.className}>
-        <div className=" grid md:p-3  min-h-screen grid-cols-1 bg-black  md:grid-cols-8">
+        <div className="  grid  min-h-screen grid-cols-1 bg-black  md:grid-cols-6">
+          <div className=" flex justify-start col-span-1 ">
           <SideBar />
 
-          <div className=" bg-neutral-900/70   rounded-l-xl md:p-2      col-span-6   text-white  md:flex md:justify-center   ">
+          </div>
+
+
+          <div className="      border-neutral-700  md:border-l-[1px]   col-span-4   text-white  md:flex md:justify-center   ">
             <Component {...pageProps} />
             <Toaster />
           </div>
-          <div className="  bg-neutral-900/70 pr-2   rounded-r-xl ">
+          <div className="  pr-2   rounded-r-xl ">
             {/* <User/> */}
           </div>
           <Bottomnav />

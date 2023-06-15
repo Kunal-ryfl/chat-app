@@ -74,15 +74,7 @@ const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][numbe
   }}
   className=" my-2 "
 >
-{/* 
-  <div className="input-group ">
-    <input type="text" value={comment} placeholder="add a comment..." className="input input-bordered w-full md:w-64 text-sm   bg-inherit"
-     onChange={(e)=>setComment(e.target.value)}
-     
-    />
-    <button className="btn btn-square">add</button>
-  </div>
- */}
+
 
   
   <div className=" xl:w-96 ">
@@ -90,7 +82,7 @@ const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][numbe
       <input
         type="search"
         className="relative m-0 -mr-px block w-[1%] min-w-0 flex-auto text-sm     bg-transparent bg-clip-padding  py-1.5  font-normal  outline-none transition duration-300 ease-in-out focus:border-primary focus:text-white/60 focus:shadow-te-primary focus:outline-none "
-        placeholder="Reply..."
+        placeholder="Add a comment"
         aria-label="Search"
         aria-describedby="button-addon1" 
         value={comment}

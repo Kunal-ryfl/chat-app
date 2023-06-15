@@ -33,22 +33,22 @@ const Feed = () => {
      </div>
   return (
     
-   <div className='  pb-16'   >
+   <div className='  pb-16 '   >
     {/* <Headroom > */}
-      <div className=' sticky top-0 z-20  w-full  max-w-3xl   border-white/10 mx-auto backdrop-blur-md'>
+      <div className=' sticky top-0 z-20  w-full  max-w-xl   border-white/10 mx-auto backdrop-blur-md'>
 
-    <div className='   w-full  max-w-3xl  mx-auto border-white/10 px-2   py-2'>
+    <div className='   w-full  max-w-2xl  mx-auto border-white/10 px-2   py-2'>
        <h1 className=' text-base md:text-xl   font-bold'>Home</h1>
     </div>
     <Create/>  
       </div>
     {/* </Headroom> */}
-    <div ref={listRef} >
+    <div   ref={listRef} className=' flex  flex-col items-center' >
     {
       posts?.length  &&
       posts?.map((post)=>(
         
-        <Post   tweet={post} key={post.id} />
+        <Post    tweet={post} key={post.id} />
         ))
       }
       </div>

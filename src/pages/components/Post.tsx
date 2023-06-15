@@ -126,7 +126,7 @@ const PostContainer = ({
   });
   
   return (
-    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-y-2  max-w-3xl    border-white/10 p-2  md:border-x-2  ">
+    <div className="   grid-row-10 grid w-full grid-cols-10  rounded-sm border-b-2  max-w-xl    border-white/10 p-2   ">
       <div className="  col-span-2  p-2  sm:col-span-1    ">
         <Link href={`/profile/${tweet?.user?.id}`}>{
         tweet?.user?.image &&
@@ -162,7 +162,7 @@ const PostContainer = ({
           {tweet?.img && (
             <Image
               src={tweet?.img}
-              className=" aspect-[16/9] w-full rounded-xl  border-2 border-white/10 md:aspect-[2/1]  "
+              className=" w-full  rounded  border-2 border-white/10 md:aspect-[4/5]  "
               unoptimized
               alt="Postimg"
               width={200}
