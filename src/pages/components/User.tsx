@@ -1,7 +1,7 @@
 import React from "react";
 import { api } from "~/utils/api";
 import Image from "next/image";
-import { MoonLoader,PacmanLoader } from 'react-spinners'
+import { MoonLoader} from 'react-spinners'
 
 const User = () => {
   const { data,isLoading ,error} = api.example.getAllUser.useQuery();
