@@ -6,8 +6,22 @@ import Skeleton from "./components/Skeleton";
 import { GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "~/server/auth";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 
 const Feed = () => {
+
+  
+  const { scrollY } = useScroll({ 
+    // target: ref,
+    // offset:['end start','start end'] 
+  });
+  const y = useTransform(scrollY,[0,200],[0,-30])
+
   const [listRef] = useAutoAnimate<HTMLDivElement>();
   const { data: posts, isLoading, error } = api.example.getPosts.useQuery();
   if (isLoading)
@@ -26,12 +40,12 @@ const Feed = () => {
     );
   return (
     <div className="  pb-16 ">
-      <div className=" sticky top-0 z-20   mx-auto  w-full  max-w-2xl border-white/10 backdrop-blur-md">
+      <motion.div style={{y}} className=" sticky top-0 z-20   mx-auto  w-full  max-w-2xl border-white/10 backdrop-blur-md">
         <div className="   mx-auto  w-full  max-w-2xl border-white/10 px-2   py-2">
           <h1 className=" text-base font-bold   md:text-xl">Home</h1>
         </div>
         <Create />
-      </div>
+      </motion.div>
       <div ref={listRef} className=" flex  flex-col items-center">
         {posts?.length &&
           posts?.map((post) => <Post tweet={post} key={post.id} />)}

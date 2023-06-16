@@ -22,9 +22,12 @@ const Profile = () => {
   });
 
    const y = useTransform(scrollY,[0,200],[0,-60])
+   const x = useTransform(scrollY,[0,200],[0,-30])
    const y1 = useTransform(scrollY,[0,200],[0,-120])
    const scale = useTransform(scrollY,[0,200],[1,0.5])
    const opacity = useTransform(scrollY,[0,200],[1,0])
+   
+   
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     console.log("Page scroll: ", latest);
@@ -33,7 +36,7 @@ const Profile = () => {
   const query = router.query.id as string;
   // console.log("Q = ", query);
 
-  const { data: useSessionData } = useSession();
+  // const { data: useSessionData } = useSession();
   const { data: user, isLoading: load1 } = api.example.getUser.useQuery({
     text: query,
   });
@@ -48,9 +51,9 @@ const Profile = () => {
   return (
     <div className=" min-h-screen  pb-16   text-white md:px-2">
       <motion.div   style={{y:y1}}   className=" z-20  sticky top-0  max-w-xl    grid  w-full  h-72 grid-cols-10 grid-rows-3 rounded-sm     ">
-        <div  className=" col-span-full  row-span-2  rounded-sm backdrop-blur-md "></div>
+        <motion.div  className=" col-span-full  row-span-2  rounded-sm backdrop-blur-md "></motion.div>
 
-        <motion.div  style={{y,scale}} className="  col-span-3 row-span-1">
+        <motion.div  style={{y,scale}} className="    col-span-3 row-span-1">
           <Image
           
             src={
@@ -66,7 +69,7 @@ const Profile = () => {
           />
         </motion.div>
 
-        <motion.div style={{y}} className=" col-span-7 px-2 py-4">
+        <motion.div style={{y}} className="  col-span-7 pl-10 py-4">
           <motion.h1  className=" text-base md:text-2xl">{user?.name}</motion.h1>
           <motion.h1 style={{opacity}} className=" text-[11px] text-gray-400 md:text-sm">
             {user?.email}
