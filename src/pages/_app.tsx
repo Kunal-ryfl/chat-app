@@ -28,7 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <SideBar />
         </div>
 
-        <div className="   col-span-5    border-neutral-700  bg-red-500   text-white   md:flex  md:justify-center md:border-l-[1px]   ">
+        <div className="   col-span-5    border-neutral-700     text-white   md:flex  md:justify-center md:border-l-[1px]   ">
           <Component {...pageProps} />
           <Toaster />
         </div>
