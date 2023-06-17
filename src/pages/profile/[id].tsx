@@ -1,11 +1,4 @@
-import React, { useRef } from "react";
-import { api } from "~/utils/api";
-import { useSession } from "next-auth/react";
 import PostContainer from "../components/Post";
-import { PacmanLoader } from "react-spinners";
-import { AiOutlineEdit } from "react-icons/ai";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import {
   motion,
   useScroll,
@@ -13,6 +6,13 @@ import {
   useMotionValueEvent,
   AnimatePresence,
 } from "framer-motion";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useRef } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
+import { PacmanLoader } from "react-spinners";
+import { api } from "~/utils/api";
 
 const Profile = () => {
   const ref = useRef(null);

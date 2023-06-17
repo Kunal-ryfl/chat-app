@@ -132,11 +132,9 @@ const PostContainer = ({
   const [isOpen, setOpen] = useState<boolean>(false);
   useEffect(() => {
     //Runs only on the first render
-    if(isOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'auto';
+    if (isOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
   }, [isOpen]);
- 
-
 
   return (
     <>
@@ -144,6 +142,8 @@ const PostContainer = ({
       <motion.div
         className="    grid-row-10 grid w-full max-w-xl  grid-cols-10 rounded-sm  border-b-[1px]    border-neutral-700 p-2   "
         layout
+        //layout helps in achieving animation when new post is added so other components behave properly
+        // u can check without it there is no proper co-ordination
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -182,7 +182,7 @@ const PostContainer = ({
 
           <div className="   ">
             <motion.div
-              layoutId={tweet?.id}
+              layoutId={tweet?.id} //layoutid helps in achieving this kind of animation like zoom
               onClick={() => setOpen(!isOpen)}
               className=" relative"
             >

@@ -1,9 +1,10 @@
-import React from "react";
-import { api } from "~/utils/api";
-import { PacmanLoader } from "react-spinners";
-import { useRouter } from "next/router";
 import Comment from "../components/Comment";
+import { useRouter } from "next/router";
+import React from "react";
 import { GiAstronautHelmet } from "react-icons/gi";
+import { PacmanLoader } from "react-spinners";
+import { api } from "~/utils/api";
+
 const Page = () => {
   const router = useRouter();
   const query = router.query.id as string;
