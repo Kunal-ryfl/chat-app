@@ -28,9 +28,9 @@ const Profile = () => {
   const scale = useTransform(scrollY, [0, 200], [1, 0.5]);
   const opacity = useTransform(scrollY, [0, 200], [1, 0]);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log("Page scroll: ", latest);
-  });
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   console.log("Page scroll: ", latest);
+  // });
   const router = useRouter();
   const query = router.query.id as string;
   // console.log("Q = ", query);

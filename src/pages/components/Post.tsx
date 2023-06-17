@@ -175,7 +175,7 @@ const PostContainer = ({
 
           <div className="   ">
             <motion.div
-              layoutId={tweet.id}
+              layoutId={tweet?.id}
               onClick={() => setOpen(!isOpen)}
               className=" relative"
             >
