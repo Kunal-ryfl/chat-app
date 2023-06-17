@@ -14,16 +14,17 @@ const Modal = ({
   setOpen:  React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   if (!isOpen) return <></>;
+
   return (
-    <div className=" z-30  fixed   inset-0  backdrop-blur-md flex justify-center items-center">
+    <div className=" z-30  fixed  inset-0  bg-black flex justify-center items-center">
       <motion.div
         layoutId={tweet.id}
-        className="     relative rounded-md w-full max-w-3xl   aspect-video   inset-0   "
+        className="  relative   rounded-md w-full max-h-screen aspect-video  max-w-3xl      "
       >
-        <h1  className=' text-2xl float-right m-2 ' onClick={() => setOpen(!isOpen)}><IoCloseOutline/></h1>
+        <h1  className=' cursor-pointer text-3xl float-right m-2 ' onClick={() => setOpen(!isOpen)}><IoCloseOutline/></h1>
         {tweet?.img && <Image src={tweet?.img} fill alt="" style={{objectFit:'contain',zIndex:-1}} />}
       </motion.div>
-    </div>
+     </div>
   );
 };
 

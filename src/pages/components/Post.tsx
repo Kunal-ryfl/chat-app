@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillHeart } from "react-icons/ai";
 import { FiMessageCircle } from "react-icons/fi";
@@ -130,6 +130,13 @@ const PostContainer = ({
   });
 
   const [isOpen, setOpen] = useState<boolean>(false);
+  useEffect(() => {
+    //Runs only on the first render
+    if(isOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'auto';
+  }, [isOpen]);
+ 
+
 
   return (
     <>
@@ -182,7 +189,7 @@ const PostContainer = ({
               {tweet?.img && (
                 <Image
                   src={tweet?.img}
-                  className=" w-full  rounded  border-[1px]  border-neutral-700 aspect-[4/5]  "
+                  className=" cursor-pointer w-full  rounded  border-[1px]  border-neutral-700 aspect-[4/5]  "
                   unoptimized
                   alt="Postimg"
                   width={200}
