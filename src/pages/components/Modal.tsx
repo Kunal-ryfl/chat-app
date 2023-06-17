@@ -11,7 +11,7 @@ const Modal = ({
 }: {
   tweet: RouterOutputs["example"]["getPosts"][number];
   isOpen: boolean;
-  setOpen: any;
+  setOpen:  React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   if (!isOpen) return <></>;
   return (
