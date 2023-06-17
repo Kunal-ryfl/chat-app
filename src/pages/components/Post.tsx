@@ -1,9 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import { api, RouterOutputs } from "~/utils/api";
 import Image from "next/image";
 import { AiFillHeart } from "react-icons/ai";
 import { FiMessageCircle } from "react-icons/fi";
-import { MdAdsClick } from "react-icons/md";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import CreateComment from "./CreateComment";
@@ -30,6 +29,14 @@ dayjs.updateLocale("en", {
     yy: "%dy",
   },
 });
+
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
+
 
 const PostContainer = ({
   tweet,
@@ -122,9 +129,17 @@ const PostContainer = ({
     },
   });
 
+  const [isOpen, setOpen] = useState(false)
+
   return (
-    <div className="   grid-row-10 grid w-full max-w-xl  grid-cols-10 rounded-sm  border-b-[1px]    border-neutral-700 p-2   ">
-      <div className="  col-span-2  p-2  sm:col-span-1    ">
+    <motion.div className="  backdrop-blur-md   grid-row-10 grid w-full max-w-xl  grid-cols-10 rounded-sm  border-b-[1px]    border-neutral-700 p-2   "
+    layout
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    transition={{duration:1,type:'spring'}}
+    >
+      <div className="  col-span-2   p-2  sm:col-span-1    ">
         <Link href={`/profile/${tweet?.user?.id}`}>
           {tweet?.user?.image && (
             <Image
@@ -172,7 +187,8 @@ const PostContainer = ({
 
 
           <div className="   flex items-center gap-4 py-2 text-slate-400  ">
-            <button
+            <motion.button
+
               className=" flex items-center gap-1"
               onClick={
                 !hasLiked
@@ -184,7 +200,7 @@ const PostContainer = ({
                 className={!hasLiked ? " text-2xl" : " fill-red-500 text-2xl"}
               />
               {tweet?._count?.likes}
-            </button>
+            </motion.button>
 
             <Link href={`/post/${tweet?.id}`}>
               <div className=" flex items-center gap-1">
@@ -197,7 +213,7 @@ const PostContainer = ({
           <CreateComment tweet={tweet} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
