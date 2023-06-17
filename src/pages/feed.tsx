@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Create from "./components/Create";
 import Post from "./components/Post";
 import { api } from "~/utils/api";
@@ -13,6 +13,7 @@ import {
   AnimatePresence,
   LayoutGroup,
 } from "framer-motion";
+
 
 const Feed = () => {
   const { scrollY } = useScroll({
@@ -47,12 +48,13 @@ const Feed = () => {
         </div>
         <Create />
       </motion.div>
-
       <motion.div  className=" flex  flex-col items-center">
         <AnimatePresence initial={false} >
           <LayoutGroup>
             {posts?.length &&
-              posts?.map((post) => <Post tweet={post} key={post.id} />)}
+              posts?.map((post) => <Post  tweet={post} key={post.id} 
+              />)}
+              
           </LayoutGroup>
         </AnimatePresence>
       </motion.div>
@@ -60,17 +62,17 @@ const Feed = () => {
   );
 };
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(ctx);
-  if (!session) {
-    return {
-      redirect: { destination: "/signin", permanent: false },
-      props: {},
-    };
-  }
+// export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+//   const session = await getServerAuthSession(ctx);
+//   if (!session) {
+//     return {
+//       redirect: { destination: "/signin", permanent: false },
+//       props: {},
+//     };
+//   }
 
-  return {
-    props: { session }, // will be passed to the page component as props
-  };
-}
+//   return {
+//     props: { session }, // will be passed to the page component as props
+//   };
+// }
 export default Feed;

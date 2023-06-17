@@ -19,6 +19,11 @@ const config = {
       },
       {
         protocol: 'https',
+        hostname: 'kdrzjjunjsbfuglvmnmk.supabase.co',
+     
+      },
+      {
+        protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
     ],

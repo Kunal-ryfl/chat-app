@@ -20,7 +20,7 @@
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
     "clsx": "^1.2.1",
-    "create-t3-app": "^7.12.2",
+    "create-t3-app": "^7.13.1",
     "daisyui": "^2.51.4",
     "dayjs": "^1.11.7",
     "framer-motion": "^10.12.16",
