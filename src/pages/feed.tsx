@@ -48,8 +48,8 @@ const Feed = () => {
         <Create />
       </motion.div>
 
-      <motion.div className=" flex  flex-col items-center">
-        <AnimatePresence initial={false}>
+      <motion.div  className=" flex  flex-col items-center">
+        <AnimatePresence initial={false} >
           <LayoutGroup>
             {posts?.length &&
               posts?.map((post) => <Post tweet={post} key={post.id} />)}
