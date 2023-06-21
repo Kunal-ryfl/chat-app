@@ -15,7 +15,6 @@ const Modal = ({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   if (!isOpen) return <></>;
-  const [loaded, setLoaded] = useState<boolean>(false);
 
   
   return (
@@ -33,7 +32,6 @@ const Modal = ({
 
         {tweet?.img && (
           <Image
-            onLoadingComplete={() => setLoaded(true)}
             src={tweet?.img}
             fill
             alt=""
