@@ -24,7 +24,6 @@ const Modal = ({
         layoutId={tweet.id}
         className="  relative  max-w-3xl border-neutral-700 w-full border-[1px] h-screen        "
       >
-        {/* {!loaded &&  <MoonLoader className=" mx-auto my-auto "  color=" #00acee" />} */}
         <h1
           className=" cursor-pointer text-4xl  float-left m-2 "
           onClick={() => setOpen(!isOpen)}
