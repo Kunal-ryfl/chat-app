@@ -15,7 +15,7 @@ const Page = () => {
   if (isLoading)
     return (
       <div className=" flex h-screen w-screen items-center justify-center">
-        <PacmanLoader color="purple" />{" "}
+        <PacmanLoader color="purple" />
       </div>
     );
 
