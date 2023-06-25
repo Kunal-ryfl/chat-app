@@ -77,7 +77,7 @@ const CreateComment = ({tweet}:{tweet:RouterOutputs['example']['getPosts'][numbe
 
 
   
-  <div className=" xl:w-96 ">
+  <div className=" px-2 w-full">
     <div className="relative mb-4 flex w-full  flex-wrap items-baseline">
       <input
         type="search"

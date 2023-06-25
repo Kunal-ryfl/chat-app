@@ -35,7 +35,7 @@ const Profile = () => {
   const query = router.query.id as string;
   // console.log("Q = ", query);
 
-  // const { data: useSessionData } = useSession();
+  const { data: useSessionData } = useSession();
   const { data: user, isLoading: load1 } = api.example.getUser.useQuery({
     text: query,
   });
@@ -49,7 +49,7 @@ const Profile = () => {
     );
   return (
     <AnimatePresence initial={false}>
-      <div className=" min-h-screen  pb-16   text-white md:px-2">
+      <div className=" min-h-screen  pb-16   text-white ">
         <motion.div
           style={{ y: y1 }}
           className=" sticky  top-0 z-20  grid    h-72  w-full  max-w-xl grid-cols-10 grid-rows-3 rounded-sm     "
@@ -123,19 +123,21 @@ const Profile = () => {
                 </div>
               </div>
             </>
-          )} */}
+          )}  */}
           </motion.div>
         </motion.div>
 
         <div className="  py-4">
           <h1 className=" p-2  font-bold">Posts</h1>
+<div className=" flex flex-col items-center gap-3">
 
           {data?.map(
             (post) =>
-              post?.userId === query && (
-                <PostContainer key={post?.id} tweet={post} />
+            post?.userId === query && (
+              <PostContainer key={post?.id} tweet={post} />
               )
-          )}
+              )}
+              </div>
         </div>
       </div>
     </AnimatePresence>

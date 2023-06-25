@@ -125,7 +125,7 @@ const Create = () => {
         const result = postInput.safeParse({ data: post, img: filePath });
 
         if (!result.success) {
-          toast.error(result.error.format()._errors.join("\n"));
+          toast.error("post cannot be empty");
           return;
         }
 

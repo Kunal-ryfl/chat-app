@@ -48,7 +48,7 @@ const Feed = () => {
         </div>
         <Create />
       </motion.div>
-      <motion.div  className=" flex  flex-col items-center">
+      <motion.div  className=" flex    flex-col items-center">
         <AnimatePresence initial={false} >
           <LayoutGroup>
             {posts?.length &&

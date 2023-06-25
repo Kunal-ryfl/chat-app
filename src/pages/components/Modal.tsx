@@ -21,13 +21,14 @@ const Modal = ({
     <div className=" z-30  fixed  inset-0 bg-black flex justify-center items-center">
       <motion.div
         layoutId={tweet.id}
+
         className="  relative  max-w-3xl border-neutral-700 w-full border-[1px] h-screen        "
       >
         <h1
-          className=" cursor-pointer text-4xl  float-left m-2 "
+          className=" cursor-pointer text-4xl  float-left my-6 mx-3 "
           onClick={() => setOpen(!isOpen)}
         >
-          <GrFormPreviousLink  className=" filter invert " />
+          <GrFormPreviousLink  className="  filter invert " />
         </h1>
 
         {tweet?.img && (
