@@ -25,16 +25,16 @@ dayjs.updateLocale("en", {
     future: "in %s",
     past: "%s",
     s: "1m",
-    m: "1m",
-    mm: "%dm",
-    h: "1h",
-    hh: "%dh",
-    d: "1d",
-    dd: "%dd",
-    M: "1M",
-    MM: "%dM",
-    y: "1y",
-    yy: "%dy",
+    m: "1 min",
+    mm: "%d mins",
+    h: "1 hour",
+    hh: "%d hours",
+    d: "1 day",
+    dd: "%d days",
+    M: "1 Month",
+    MM: "%d Months",
+    y: "1 year",
+    yy: "%d years",
   },
 });
 
@@ -185,8 +185,8 @@ const PostContainer = ({
               </Link>
               <div className=" py-2">
                 <p className=" text-sm  font-bold "> {tweet?.user?.name}</p>
-                <p className=" text-xs font-extralight   text-slate-400">
-                  {dayjs(tweet?.createdAt).fromNow()}
+                <p className=" uppercase text-xs font-extralight  text-neutral-400">
+                  {dayjs(tweet?.createdAt).fromNow()} ago
                 </p>
               </div>
             </div>

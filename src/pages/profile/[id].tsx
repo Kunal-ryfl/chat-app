@@ -28,9 +28,10 @@ const Profile = () => {
   const scale = useTransform(scrollY, [0, 200], [1, 0.5]);
   const opacity = useTransform(scrollY, [0, 200], [1, 0]);
 
-  // useMotionValueEvent(scrollY, "change", (latest) => {
-  //   console.log("Page scroll: ", latest);
-  // });
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    console.log("Page scroll: ", latest);
+    
+  });
   const router = useRouter();
   const query = router.query.id as string;
   // console.log("Q = ", query);
@@ -52,13 +53,13 @@ const Profile = () => {
       <div className=" min-h-screen  pb-16   text-white ">
         <motion.div
           style={{ y: y1 }}
-          className=" sticky  top-0 z-20  grid    h-72  w-full  max-w-xl grid-cols-10 grid-rows-3 rounded-sm     "
+          className="   grid  border-b-[1px] border-neutral-700    py-10  w-full  max-w-xl grid-cols-10  rounded-sm     "
         >
-          <motion.div className=" col-span-full  row-span-2  rounded-sm backdrop-blur-md "></motion.div>
+          {/* <motion.div className=" col-span-full  row-span-2  rounded-sm backdrop-blur-md "></motion.div> */}
 
           <motion.div
             style={{ y, scale }}
-            className="    col-span-3 row-span-1"
+            className="     col-span-3 "
           >
             <Image
               src={
@@ -69,7 +70,7 @@ const Profile = () => {
               width={120}
               unoptimized
               alt=""
-              className=" relative -top-14 left-2 rounded-full border-2  border-white/10"
+              className=" relative rounded-full border-2  border-white/10"
             />
           </motion.div>
 
