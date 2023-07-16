@@ -25,17 +25,17 @@ const Page = () => {
     );
 
   return (
-    <div className="  min-h-screen py-2 pb-16 ">
-      <div className=" border-b-[1px]  border-neutral-700 py-2 w-full flex max-w-xl">
-        <div    className=" p-2 w-full">
+    <div className="  min-h-screen px-2 py-2 pb-16 ">
+      <div className=" border-b-[1px]  h-32 border-neutral-700 py-2 w-full flex max-w-xl">
+        <div    className=" py-2 w-full">
           <h1 className="text-base  ">  {postData?.caption}</h1>
         </div>
 
-        <div className=" h-32     relative shrink-0  w-40">
+        <div className="    relative shrink-0  w-40">
           {postData?.img && (
             <Image
               src={postData?.img}
-              className=" cursor-pointer    border-neutral-700 aspect-[4/5]  "
+              className=" cursor-pointer     border-neutral-700 aspect-[4/5]  "
               unoptimized
               alt="Postimg"
               fill
