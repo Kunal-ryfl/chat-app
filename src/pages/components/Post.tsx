@@ -149,7 +149,7 @@ const PostContainer = ({
         exit={{ opacity: 0 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <div className="    grid-rows-10 col-span-full py-2  grid  ">
+        <div className="    grid-rows-10 col-span-full   grid  ">
           <div className="   ">
             <div className=" flex   px-2    gap-2">
               <Link href={`/profile/${tweet?.user?.id}`}>
@@ -224,7 +224,7 @@ const PostContainer = ({
                 <p>{tweet?._count?.comments} replies</p>
               </Link>
             </div>
-            {/* <CreateComment tweet={tweet} /> */}
+            <CreateComment tweet={tweet} />
           </div>
         </div>
       </motion.div>
