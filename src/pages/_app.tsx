@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import Bottomnav from "./components/Bottomnav";
-import { Inter, Open_Sans } from "next/font/google";
+import { Inter, Open_Sans,Montserrat } from "next/font/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SideBar from "./components/SideBar";
 
@@ -13,6 +13,7 @@ import User from "./components/User";
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ["latin"] });
 const os = Open_Sans({ subsets: ["latin"] });
+const ms = Montserrat({ subsets: ["latin"] });
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -21,7 +22,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <div
-        style={os.style}
+        style={ms.style}
         className="  grid  min-h-screen grid-cols-1 bg-black  md:grid-cols-6"
       >
         <div className=" col-span-1 flex justify-start ">

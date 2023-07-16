@@ -163,6 +163,26 @@ export const exampleRouter = createTRPCRouter({
 
   getPostById:protectedProcedure.input(z.string()).query(async({ctx,input})=>{
  
+    return ctx.prisma.post.findUnique({
+      where:{
+        id:input
+      },
+      include:{
+        user: {
+          select: {
+            name: true,
+            image: true,
+            id: true,
+          },
+        },
+      },
+   
+    })
+     
+  }),  
+  
+  getComById:protectedProcedure.input(z.string()).query(async({ctx,input})=>{
+ 
     return ctx.prisma.comment.findMany({
       where:{
         Postid:input

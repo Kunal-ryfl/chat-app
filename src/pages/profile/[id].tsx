@@ -35,9 +35,9 @@ const Profile = () => {
     );
   return (
     <AnimatePresence initial={false}>
-      <div className=" min-h-screen  pb-16   text-white ">
+      <div className=" min-h-screen   pb-16  w-full max-w-xl  text-white ">
         <motion.div
-          className="  border-b-[1px] border-neutral-700  px-2 pt-8   pb-2  w-full  max-w-xl flex  rounded-sm     "
+          className=" min-h-[180px] border-b-[1px] border-neutral-700  px-2 pt-8   pb-2  w-full  flex  rounded-sm     "
         >
 
           <motion.div className=" w-full    ">
