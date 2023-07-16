@@ -29,7 +29,8 @@ const Page = () => {
         <div className="    grid-rows-10 col-span-full py-2  grid  ">
           <div className="   ">
             <div className=" flex   px-2    gap-2">
-              <Link href={`/profile/${postData?.user.id}`}>
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+              <Link href={`/profile/${postData?.user?.id}`}>
                 {postData?.user?.image && (
                   <Image
                     src={postData?.user?.image || "/img"}
@@ -44,6 +45,7 @@ const Page = () => {
                 )}
               </Link>
               <div className=" flex  justify-between w-full py-2">
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                 <p className=" text-sm   "> {postData?.user?.name}</p>
                 <p className="  text-xs font-extralight  text-neutral-400">
                   {/* {dayjs(tweet?.createdAt).fromNow()} */}
@@ -52,6 +54,7 @@ const Page = () => {
             </div>
 
             <p className=" md:text-md my-1 mx-2 text-sm    text-neutral-200 ">
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               {postData?.caption}
             </p>
           </div>
