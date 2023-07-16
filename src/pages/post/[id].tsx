@@ -14,8 +14,7 @@ const Page = () => {
   // console.log("Q = ", query);
 
   const { data, isLoading, error } = api.example.getComById.useQuery(query);
-  const { data: postData, isLoading: loading2 } =
-    api.example.getPostById.useQuery(query);
+  const { data: postData, isLoading: loading2 } = api.example.getPostById.useQuery(query);
 
   if (isLoading || loading2)
     return (
@@ -30,7 +29,7 @@ const Page = () => {
         <div className="    grid-rows-10 col-span-full py-2  grid  ">
           <div className="   ">
             <div className=" flex   px-2    gap-2">
-              <Link href={`/profile/${postData?.user?.id}`}>
+              <Link href={`/profile/${postData?.user.id}`}>
                 {postData?.user?.image && (
                   <Image
                     src={postData?.user?.image || "/img"}
@@ -85,7 +84,7 @@ const Page = () => {
 
       {/* <CreateComment tweet={postData} /> */}
 
-      {data && data.length < 1 && (
+      {data && data?.length < 1 && (
         <div className="  w-full p-2     md:w-[600px]">
           <GiAstronautHelmet className=" mx-auto  mt-20  text-9xl" />
           <h1 className=" text-center text-xl ">Silence here </h1>
@@ -94,7 +93,7 @@ const Page = () => {
       )}
 
       {data &&
-        data.length > 0 &&
+        data?.length > 0 &&
         data?.map((comment) => (
           <Comment
             caption={comment?.caption}
